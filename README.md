@@ -14,3 +14,4 @@
 11. ❌ Feed: user can easily find out the new posts from users by feed page - list of posts.
 12. ❌ Notifications: if user post was replied by someone, or you received a like, repost, get new follower - you can see it on notifications page that look like list of events.
 13. ❌ Search: user can search posts by typing their request in the input, search workds as you type. With search you can find posts and users.
+14. ❌ Hashtags: user can type a hashtag in post, like #un and others can easily find it with search.
