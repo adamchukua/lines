@@ -1,5 +1,3 @@
-import './NavMenu.css';
-
 export default function NavMenu() {
     return (
         <nav>

@@ -1,10 +1,11 @@
 import NavMenu from './NavMenu';
 import { Columns } from "react-bulma-components";
+import SearchMenu from './SearchMenu';
 
 export default function Layout({ children }) {
     return (
         <Columns className="my-4">
-            <Columns.Column>
+            <Columns.Column size={3}>
                 <NavMenu />
             </Columns.Column>
             
@@ -12,8 +13,8 @@ export default function Layout({ children }) {
                 {children}
             </Columns.Column>
 
-            <Columns.Column>
-                search and footer
+            <Columns.Column size={3}>
+                <SearchMenu />
             </Columns.Column>
         </Columns>
     );
