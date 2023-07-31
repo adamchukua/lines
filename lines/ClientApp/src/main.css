@@ -53,3 +53,18 @@ body {
 .menu-list li a:hover {
     text-decoration: underline;
 }
+
+.post {
+    box-shadow: none;
+    border-top: 1px solid #000;
+    border-radius: 0;
+    margin-bottom: 0 !important;
+}
+
+.post:last-child {
+    border-bottom: 1px solid #000;
+}
+
+.text-black {
+    color: #000;
+}
