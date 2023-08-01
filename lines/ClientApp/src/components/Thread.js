@@ -1,10 +1,10 @@
 import Post from "./Post"
 
-export default function Thread() {
+export default function Thread({ isFullThread }) {
     return (
         <>
             <Post isThread={true} />
-            <Post />
+            <Post isThread={isFullThread} />
         </>
     );
 }
