@@ -68,3 +68,14 @@ body {
 .text-black {
     color: #000;
 }
+
+.media + .media {
+    border-top: none;
+}
+
+.thread-line {
+    width: 1px;
+    background: #000;
+    height: 200%;
+    margin-left: 50%;
+}
