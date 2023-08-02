@@ -1,6 +1,7 @@
 import Home from "./components/Home";
 import NotificationsPage from "./components/NotificationsPage";
 import PostPage from "./components/PostPage";
+import SettingsPage from "./components/SettingsPage";
 
 const AppRoutes = [
     {
@@ -14,6 +15,10 @@ const AppRoutes = [
     {
         path: "/notifications",
         element: <NotificationsPage />
+    },
+    {
+        path: "/settings",
+        element: <SettingsPage />
     }
 ];
 
