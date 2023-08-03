@@ -1,18 +1,18 @@
 ﻿using lines.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection.Emit;
+using Microsoft.AspNetCore.Identity;
 
 namespace lines.Infrastructure.Data
 {
-    public class LinesDbContext : IdentityDbContext
+    public class LinesDbContext : IdentityDbContext<User, IdentityRole<long>, long>
     {
         public LinesDbContext(DbContextOptions<LinesDbContext> options)
             : base(options)
         {
 
         }
-
-        public DbSet<User> Users { get; set; }
 
         public DbSet<Post> Posts { get; set; }
 
@@ -28,6 +28,7 @@ namespace lines.Infrastructure.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            base.OnModelCreating(builder);
             builder.ApplyConfigurationsFromAssembly(typeof(LinesDbContext).Assembly);
         }
     }
