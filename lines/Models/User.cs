@@ -1,10 +1,10 @@
-﻿namespace lines.Models
+﻿using Microsoft.AspNetCore.Identity;
+
+namespace lines.Models
 {
-    public class User
+    public class User : IdentityUser<long>
     {
-        public long Id { get; set; }
         public string Name { get; set; }
-        public string Email { get; set; }
         public string Password { get; set; }
         public string Nickname { get; set; }
         public string? Description { get; set; }
