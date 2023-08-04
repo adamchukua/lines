@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using lines.Infrastructure.Data;
 
@@ -11,9 +12,11 @@ using lines.Infrastructure.Data;
 namespace lines.Migrations
 {
     [DbContext(typeof(LinesDbContext))]
-    partial class LinesDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230804070405_DeletePasswordNicknameInUser")]
+    partial class DeletePasswordNicknameInUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

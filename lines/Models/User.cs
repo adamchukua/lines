@@ -5,8 +5,6 @@ namespace lines.Models
     public class User : IdentityUser<long>
     {
         public string Name { get; set; }
-        public string Password { get; set; }
-        public string Nickname { get; set; }
         public string? Description { get; set; }
         public string? Avatar { get; set; }
         public IEnumerable<Post> Posts { get; set; }
