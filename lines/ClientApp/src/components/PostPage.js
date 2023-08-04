@@ -1,4 +1,4 @@
-import PostsList from "./PostsList";
+import PostsList from "../features/posts/PostsList";
 import Post from "./Post";
 import Thread from "./Thread";
 import ReplyInput from "./ReplyInput";
