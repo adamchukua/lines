@@ -1,6 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
 import AppRoutes from './AppRoutes';
-import Layout from '../components/Layout';
+import Layout from '../common/Layout';
 import '../main.css';
 
 export default function App() {

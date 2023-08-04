@@ -1,8 +1,8 @@
-import Home from "../components/Home";
-import NotificationsPage from "../components/NotificationsPage";
-import PostPage from "../components/PostPage";
-import ProfilePage from "../components/ProfilePage";
-import SettingsPage from "../components/SettingsPage";
+import Home from "../common/Home";
+import NotificationsPage from "../features/notifications/NotificationsPage";
+import PostPage from "../common/PostPage";
+import ProfilePage from "../common/ProfilePage";
+import SettingsPage from "../common/SettingsPage";
 
 const AppRoutes = [
     {
