@@ -1,3 +1,4 @@
+using lines.Infrastructure;
 using lines.Infrastructure.Data;
 using lines.Models;
 using Microsoft.AspNetCore.Identity;
@@ -29,6 +30,12 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
 
+using (var scope = app.Services.CreateScope())
+{
+    var context = scope.ServiceProvider.GetRequiredService<LinesDbContext>();
+    await context.Database.EnsureCreatedAsync();
+    DataSeeder.SeedData(context);
+}
 
 app.MapControllerRoute(
     name: "default",
