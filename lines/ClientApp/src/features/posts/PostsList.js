@@ -1,5 +1,5 @@
-import Post from "./Post";
-import Thread from "./Thread";
+import Post from "../../components/Post";
+import Thread from "../../components/Thread";
 
 export default function PostsList() {
     return (
