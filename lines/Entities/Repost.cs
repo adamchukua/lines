@@ -1,4 +1,4 @@
-﻿namespace lines.Entities
+﻿namespace Lines.Entities
 {
     public class Repost
     {

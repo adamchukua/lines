@@ -1,10 +1,9 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
-using System.Reflection.Emit;
-using lines.Entities;
+﻿using Lines.Entities;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
-namespace lines.Infrastructure.Data
+namespace Lines.Infrastructure.Data
 {
     public class LinesDbContext : IdentityDbContext<User, IdentityRole<long>, long>
     {

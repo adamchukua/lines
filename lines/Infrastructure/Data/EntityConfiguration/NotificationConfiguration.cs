@@ -1,8 +1,8 @@
-﻿using lines.Entities;
+﻿using Lines.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace lines.Infrastructure.Data.EntityConfiguration
+namespace Lines.Infrastructure.Data.EntityConfiguration
 {
     public class NotificationConfiguration : IEntityTypeConfiguration<Notification>
     {

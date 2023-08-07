@@ -1,7 +1,7 @@
-﻿using lines.Entities;
-using lines.Infrastructure.Data;
+﻿using Lines.Entities;
+using Lines.Infrastructure.Data;
 
-namespace lines.Infrastructure
+namespace Lines.Infrastructure
 {
     public static class DataSeeder
     {
