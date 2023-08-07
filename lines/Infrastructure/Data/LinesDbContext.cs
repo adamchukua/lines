@@ -1,7 +1,7 @@
-﻿using lines.Models;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection.Emit;
+using lines.Entities;
 using Microsoft.AspNetCore.Identity;
 
 namespace lines.Infrastructure.Data

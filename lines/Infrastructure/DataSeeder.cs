@@ -1,5 +1,5 @@
-﻿using lines.Infrastructure.Data;
-using lines.Models;
+﻿using lines.Entities;
+using lines.Infrastructure.Data;
 
 namespace lines.Infrastructure
 {

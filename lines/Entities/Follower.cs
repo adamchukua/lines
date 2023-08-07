@@ -1,4 +1,4 @@
-﻿namespace lines.Models
+﻿namespace lines.Entities
 {
     public class Follower
     {

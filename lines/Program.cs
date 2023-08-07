@@ -1,6 +1,6 @@
+using lines.Entities;
 using lines.Infrastructure;
 using lines.Infrastructure.Data;
-using lines.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
