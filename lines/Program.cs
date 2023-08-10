@@ -1,6 +1,7 @@
 using Lines.Entities;
 using Lines.Infrastructure;
 using Lines.Infrastructure.Data;
+using Lines.Services.PostsService;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -18,6 +19,8 @@ builder.Services.AddIdentity<User, IdentityRole<long>>()
     .AddDefaultTokenProviders();
 
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddScoped<IPostsService, PostsService>();
 
 var app = builder.Build();
 
