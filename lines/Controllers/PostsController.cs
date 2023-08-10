@@ -9,9 +9,9 @@ namespace Lines.Controllers
     [ApiController]
     public class PostsController : ControllerBase
     {
-        private readonly PostsService _postsService;
+        private readonly IPostsService _postsService;
 
-        public PostsController(PostsService postsService)
+        public PostsController(IPostsService postsService)
         {
             _postsService = postsService;
         }
