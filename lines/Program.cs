@@ -13,13 +13,11 @@ builder.Services.AddDbContext<LinesDbContext>(options =>
 {
     options.UseSqlServer(connectionString);
 });
-
 builder.Services.AddIdentity<User, IdentityRole<long>>()
     .AddEntityFrameworkStores<LinesDbContext>()
     .AddDefaultTokenProviders();
-
 builder.Services.AddControllersWithViews();
-
+builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IPostsService, PostsService>();
 
 var app = builder.Build();
@@ -45,5 +43,8 @@ app.MapControllerRoute(
     pattern: "{controller}/{action=Index}/{id?}");
 
 app.MapFallbackToFile("index.html");
+
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.Run();
