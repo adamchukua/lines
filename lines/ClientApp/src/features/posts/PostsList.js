@@ -1,18 +1,19 @@
+import DataDisplay from "../../common/DataDisplay";
 import Post from "../../common/Post";
 import Thread from "../../common/Thread";
 
 export default function PostsList({ posts }) {
     const findReply = (post) => {
-        return posts.find(p => p.repliedPostId == post.id);
+        return posts.posts.find(p => p.repliedPostId == post.id);
     }
 
     const findOriginalPost = (reply) => {
-        return posts.find(p => p.id == reply.repliedPostId);
+        return posts.posts.find(p => p.id == reply.repliedPostId);
     }
 
     return (
-        <>
-            {posts && posts.map((post, index) => (
+        <DataDisplay status={posts.status} error={posts.error}>
+            {posts.posts.map((post) => (
                 <>
                     {findReply(post) ? (
                         <Thread posts={[post, findReply(post)]} />    
@@ -27,6 +28,6 @@ export default function PostsList({ posts }) {
                     )}
                 </>
             ))}
-        </>
+        </DataDisplay>
     );
 }

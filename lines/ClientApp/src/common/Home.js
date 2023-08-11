@@ -14,7 +14,7 @@ export default function Home() {
     return (
         <>
             {posts && (
-                <PostsList posts={posts.posts} />
+                <PostsList posts={posts} />
             )}
         </>
     );

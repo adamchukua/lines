@@ -113,3 +113,9 @@ body {
     position: absolute;
     top: -50%;
 }
+
+.progress {
+    border-radius: 0;
+    background-image: linear-gradient(to right,#000 30%,#ededed 30%);
+    height: 1rem;
+}
