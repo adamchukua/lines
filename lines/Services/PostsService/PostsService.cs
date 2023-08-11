@@ -20,6 +20,7 @@ namespace Lines.Services.PostsService
                 .Include(p => p.Reposts)
                 .Include(p => p.Likes)
                 .Include(p => p.Replies)
+                .OrderByDescending(p => p.CreatedAt)
                 .ToListAsync();
         }
     }
