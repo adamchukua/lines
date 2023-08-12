@@ -1,4 +1,5 @@
-﻿using Lines.Entities;
+﻿using Lines.DTOs;
+using Lines.Entities;
 using Lines.Services.PostsService;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -17,7 +18,7 @@ namespace Lines.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<Post>>> GetAllPosts()
+        public async Task<ActionResult<List<PostBasicInfoDTO>>> GetAllPosts()
         {
             var posts = await _postsService.GetAllPostsAsync();
             return Ok(posts);

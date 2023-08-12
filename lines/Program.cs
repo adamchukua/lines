@@ -21,6 +21,7 @@ builder.Services.AddIdentity<User, IdentityRole<long>>()
     .AddDefaultTokenProviders();
 builder.Services.AddControllersWithViews();
 builder.Services.AddSwaggerGen();
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddScoped<IPostsService, PostsService>();
 
 var app = builder.Build();

@@ -1,5 +1,7 @@
-﻿using Lines.Entities;
+﻿using AutoMapper;
+using Lines.Entities;
 using Lines.Infrastructure.Data;
+using Lines.Profiles;
 using Lines.Services.PostsService;
 using Microsoft.EntityFrameworkCore;
 using NUnit.Framework;
@@ -20,8 +22,14 @@ namespace Lines.Tests
                 .Options;
 
             _dbContext = new LinesDbContext(options);
+            var mapperConfig = new MapperConfiguration(cfg =>
+            {
+                cfg.AddProfile<PostProfile>();
+                cfg.AddProfile<UserProfile>();
+            });
+            var _mapper = mapperConfig.CreateMapper();
 
-            _postsService = new PostsService(_dbContext);
+            _postsService = new PostsService(_dbContext, _mapper);
         }
 
         [TearDown]

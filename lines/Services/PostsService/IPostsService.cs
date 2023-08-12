@@ -1,9 +1,9 @@
-﻿using Lines.Entities;
+﻿using Lines.DTOs;
 
 namespace Lines.Services.PostsService
 {
     public interface IPostsService
     {
-        Task<List<Post>> GetAllPostsAsync();
+        Task<List<PostBasicInfoDTO>> GetAllPostsAsync();
     }
 }
