@@ -63,7 +63,7 @@ export default function Post({ isThread, post }) {
                                         <i className="fas fa-reply" aria-hidden="true"></i>
                                     </span>
 
-                                    <p className="ml-2">{post.replies.length}</p>
+                                    <p className="ml-2">{post.repliesLength}</p>
                                 </a>
 
                                 <a className="level-item text-black" aria-label="retweet">
@@ -71,7 +71,7 @@ export default function Post({ isThread, post }) {
                                         <i className="fas fa-retweet" aria-hidden="true"></i>
                                     </span>
 
-                                    <p className="ml-2">{post.reposts.length}</p>
+                                    <p className="ml-2">{post.repostsLength}</p>
                                 </a>
 
                                 <a className="level-item text-black" aria-label="like">
@@ -79,7 +79,7 @@ export default function Post({ isThread, post }) {
                                         <i className="fas fa-heart" aria-hidden="true"></i>
                                     </span>
 
-                                    <p className="ml-2">{post.likes.length}</p>
+                                    <p className="ml-2">{post.likesLength}</p>
                                 </a>
 
                                 <a className="level-item text-black" aria-label="share">
