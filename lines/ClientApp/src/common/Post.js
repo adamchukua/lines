@@ -33,7 +33,7 @@ export default function Post({ isThread, post }) {
                 <article className="media">
                     <div className="media-left">
                         <figure className="image is-64x64">
-                            <img src={post.user.avatar} className="is-rounded" alt="Image" />
+                            <img src={`/images/avatars/${post.user.avatar}`} className="is-rounded" alt="Image" />
 
                             {isThread && (<div className="thread-line"></div>)}
                         </figure>

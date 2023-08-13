@@ -7,7 +7,7 @@ export default function UserInfo({ user }) {
 
             <section className="profile-data pl-3">
                 <figure className="profile-avatar image is-64x64">
-                    <img src={user.avatar} className="is-rounded profile-avatar--img" alt="Image" />
+                    <img src={`/images/avatars/${user.avatar}`} className="is-rounded profile-avatar--img" alt="Image" />
                 </figure>
 
                 <h3 className="title is-3 mb-2">{user.name}</h3>
