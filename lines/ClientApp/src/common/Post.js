@@ -42,9 +42,9 @@ export default function Post({ isThread, post }) {
                     <div className="media-content">
                         <div className="content">
                             <div className="is-flex is-justify-content-space-between">
-                                <p>
+                                <a href={`profile/${post.user.userName}`}>
                                     <strong>{post.user.name}</strong> <small>@{post.user.userName}</small>
-                                </p>
+                                </a>
 
                                 <p>
                                     <small>{getHumanReadableTime(new Date(post.createdAt))}</small>
@@ -63,7 +63,7 @@ export default function Post({ isThread, post }) {
                                         <i className="fas fa-reply" aria-hidden="true"></i>
                                     </span>
 
-                                    <p className="ml-2">{post.repliesLength}</p>
+                                    <p className="ml-2">{post.repliesCount}</p>
                                 </a>
 
                                 <a className="level-item text-black" aria-label="retweet">
@@ -71,7 +71,7 @@ export default function Post({ isThread, post }) {
                                         <i className="fas fa-retweet" aria-hidden="true"></i>
                                     </span>
 
-                                    <p className="ml-2">{post.repostsLength}</p>
+                                    <p className="ml-2">{post.repostsCount}</p>
                                 </a>
 
                                 <a className="level-item text-black" aria-label="like">
@@ -79,7 +79,7 @@ export default function Post({ isThread, post }) {
                                         <i className="fas fa-heart" aria-hidden="true"></i>
                                     </span>
 
-                                    <p className="ml-2">{post.likesLength}</p>
+                                    <p className="ml-2">{post.likesCount}</p>
                                 </a>
 
                                 <a className="level-item text-black" aria-label="share">
