@@ -16,7 +16,7 @@ namespace Lines.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<UserDetailedInfoDTO>> GetUser(string userName)
+        public async Task<ActionResult<UserWithPostsRepostsLikesDTO>> GetUser(string userName)
         {
             var user = await _usersService.GetUserAsync(userName);
 
