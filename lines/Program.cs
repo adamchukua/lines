@@ -2,6 +2,7 @@ using Lines.Entities;
 using Lines.Infrastructure;
 using Lines.Infrastructure.Data;
 using Lines.Services.PostsService;
+using Lines.Services.UsersService;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -23,6 +24,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddSwaggerGen();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddScoped<IPostsService, PostsService>();
+builder.Services.AddScoped<IUsersService, UsersService>();
 
 var app = builder.Build();
 
