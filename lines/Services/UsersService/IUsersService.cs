@@ -4,6 +4,6 @@ namespace Lines.Services.UsersService
 {
     public interface IUsersService
     {
-        Task<UserDetailedInfoDTO> GetUserAsync(string userName);
+        Task<UserWithPostsRepostsLikesDTO> GetUserAsync(string userName);
     }
 }

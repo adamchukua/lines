@@ -16,16 +16,28 @@ namespace Lines.Services.UsersService
             _mapper = mapper;
         }
 
-        public async Task<UserDetailedInfoDTO> GetUserAsync(string userName)
+        public async Task<UserWithPostsRepostsLikesDTO> GetUserAsync(string userName)
         {
-            var user = await _dbContext.Users.FirstOrDefaultAsync(x => x.UserName == userName);
+            var user = await _dbContext.Users
+                .Include(u => u.Posts)
+                .Include(u => u.Reposts)
+                .Include(u => u.Followers)
+                .Include(u => u.Following)
+                .Include(u => u.Likes)
+                .Include(u => u.Likes)
+                    .ThenInclude(l => l.Post)
+                        .ThenInclude(p => p.User)
+                .Include(u => u.Likes)
+                    .ThenInclude(l => l.Post)
+                        .ThenInclude(p => p.Replies)
+                .FirstOrDefaultAsync(x => x.UserName == userName);
 
             if (user == null)
             {
                 return null;
             }
 
-            var userDto = _mapper.Map<UserDetailedInfoDTO>(user);
+            var userDto = _mapper.Map<UserWithPostsRepostsLikesDTO>(user);
             return userDto;
         }
     }
