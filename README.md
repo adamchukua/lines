@@ -1,5 +1,9 @@
 # lines - social with freedom
 
+## UI Design
+
+Figma: https://www.figma.com/file/xjaLVnq6uNFe3vlB4jqO1F/lines-design?type=design&node-id=0%3A1&mode=design&t=mxv1s085qxXpii2V-1
+
 ## Features:
 1. ❌ Registration: user can create account with name, nickname, email, password.
 2. ❌ Login: user can log in their account with email and password.

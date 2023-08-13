@@ -1,10 +1,11 @@
 import Post from "./Post"
 
-export default function Thread({ isFullThread }) {
+export default function Thread({ isFullThread, posts }) {
     return (
         <>
-            <Post isThread={true} />
-            <Post isThread={isFullThread} />
+            {posts && posts.map((post, index) => (
+                <Post isThread={posts.length - 1 != index ? true : isFullThread} post={post} />
+            ))}
         </>
     );
 }

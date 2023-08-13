@@ -1,6 +1,7 @@
 using Lines.Entities;
 using Lines.Infrastructure;
 using Lines.Infrastructure.Data;
+using Lines.Services.PostsService;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,16 +9,20 @@ var builder = WebApplication.CreateBuilder(args);
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
+builder.Services.AddControllersWithViews().AddNewtonsoftJson(options =>
+    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+);
 builder.Services.AddDbContext<LinesDbContext>(options =>
 {
     options.UseSqlServer(connectionString);
 });
-
 builder.Services.AddIdentity<User, IdentityRole<long>>()
     .AddEntityFrameworkStores<LinesDbContext>()
     .AddDefaultTokenProviders();
-
 builder.Services.AddControllersWithViews();
+builder.Services.AddSwaggerGen();
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+builder.Services.AddScoped<IPostsService, PostsService>();
 
 var app = builder.Build();
 
@@ -42,5 +47,8 @@ app.MapControllerRoute(
     pattern: "{controller}/{action=Index}/{id?}");
 
 app.MapFallbackToFile("index.html");
+
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.Run();
