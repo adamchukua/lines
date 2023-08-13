@@ -9,6 +9,7 @@ namespace Lines.Profiles
         public UserProfile()
         {
             CreateMap<UserBasicInfoDTO, User>().ReverseMap();
+            CreateMap<UserDetailedInfoDTO, User>().ReverseMap();
         }
     }
 }
