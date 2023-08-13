@@ -22,7 +22,7 @@ const AppRoutes = [
         element: <SettingsPage />
     },
     {
-        path: "/profile",
+        path: "/profile/:userName",
         element: <ProfilePage />
     }
 ];
