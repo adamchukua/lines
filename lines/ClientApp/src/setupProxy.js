@@ -8,6 +8,7 @@ const context = [
     "/swagger",
     "/api/Posts",
     "/api/Users",
+    "/api/Likes",
 ];
 
 module.exports = function(app) {
