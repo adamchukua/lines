@@ -1,6 +1,7 @@
 using Lines.Entities;
 using Lines.Infrastructure;
 using Lines.Infrastructure.Data;
+using Lines.Services.ILikesService;
 using Lines.Services.PostsService;
 using Lines.Services.UsersService;
 using Microsoft.AspNetCore.Identity;
@@ -25,6 +26,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddScoped<IPostsService, PostsService>();
 builder.Services.AddScoped<IUsersService, UsersService>();
+builder.Services.AddScoped<ILikesService, LikesService>();
 
 var app = builder.Build();
 
