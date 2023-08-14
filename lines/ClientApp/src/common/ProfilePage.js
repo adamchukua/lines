@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchUser } from "../features/user/userSlice";
+import { fetchUserReplies } from "../features/replies/repliesSlice";
 import PostsList from "../features/posts/PostsList";
 import UserInfo from "../features/user/UserInfo";
 import DataDisplay from "../common/DataDisplay";
@@ -10,11 +11,16 @@ export default function ProfilePage() {
     const userName = useParams()["userName"];
     const dispatch = useDispatch();
     const user = useSelector((state) => state.user);
+    const replies = useSelector((state) => state.replies);
     const [selectedTab, setSelectedTab] = useState("posts");
 
     useEffect(() => {
         dispatch(fetchUser(userName));
     }, [dispatch]);
+
+    useEffect(() => {
+        dispatch(fetchUserReplies(user.user?.userName));
+    }, [user.user.userName]);
 
     return (
         <DataDisplay status={user.status} error={user.error}>
@@ -41,7 +47,7 @@ export default function ProfilePage() {
             )}
 
             {selectedTab === "replies" && (
-                <PostsList posts={user.user.posts?.filter(p => p.repliedPostId !== null)} />
+                <PostsList posts={replies.replies} />
             )}
 
             {selectedTab === "likes" && (
