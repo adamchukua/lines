@@ -1,5 +1,4 @@
-﻿using Lines.Entities;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Lines.DTOs
 {
@@ -14,14 +13,14 @@ namespace Lines.DTOs
         [MaxLength(100)]
         public string? Avatar { get; set; }
         [Required]
-        public IEnumerable<PostBasicInfoDTO> Posts { get; set; }
+        public IReadOnlyList<PostBasicInfoDTO> Posts { get; set; }
         [Required]
-        public IEnumerable<RepostBasicInfoDTO> Reposts { get; set; }
+        public IReadOnlyList<RepostBasicInfoDTO> Reposts { get; set; }
         [Required]
         public int FollowersCount { get; set; }
         [Required]
         public int FollowingCount { get; set; }
         [Required]
-        public IEnumerable<PostBasicInfoDTO> Likes { get; set; }
+        public IReadOnlyList<PostBasicInfoDTO> Likes { get; set; }
     }
 }
