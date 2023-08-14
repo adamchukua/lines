@@ -28,7 +28,7 @@ namespace Lines.Controllers
             return Ok(postDtos);
         }
 
-        [HttpGet("GetUserReplies")]
+        [HttpGet("GetUserReplies/{userName}")]
         public async Task<ActionResult<List<PostBasicInfoDTO>>> GetUserReplies(string userName)
         {
             var replies = await _postsService.GetUserRepliesAsync(userName);

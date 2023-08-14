@@ -19,7 +19,7 @@ namespace Lines.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet]
+        [HttpGet("{userName}")]
         public async Task<ActionResult<List<PostBasicInfoDTO>>> GetUserLikes(string userName)
         {
             var likes = await _likesService.GetUserLikesAsync(userName);
