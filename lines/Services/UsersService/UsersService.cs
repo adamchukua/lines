@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Lines.DTOs;
+using Lines.Entities;
 using Lines.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,15 +9,13 @@ namespace Lines.Services.UsersService
     public class UsersService : IUsersService
     {
         private readonly LinesDbContext _dbContext;
-        private readonly IMapper _mapper;
 
-        public UsersService(LinesDbContext dbContext, IMapper mapper)
+        public UsersService(LinesDbContext dbContext)
         {
             _dbContext = dbContext;
-            _mapper = mapper;
         }
 
-        public async Task<UserWithPostsRepostsLikesDTO> GetUserAsync(string userName)
+        public async Task<User> GetUserAsync(string userName)
         {
             var user = await _dbContext.Users
                 .Include(u => u.Posts)
@@ -31,14 +30,7 @@ namespace Lines.Services.UsersService
                     .ThenInclude(l => l.Post)
                         .ThenInclude(p => p.Replies)
                 .FirstOrDefaultAsync(x => x.UserName == userName);
-
-            if (user == null)
-            {
-                return null;
-            }
-
-            var userDto = _mapper.Map<UserWithPostsRepostsLikesDTO>(user);
-            return userDto;
+            return user;
         }
     }
 }

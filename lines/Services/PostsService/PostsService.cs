@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Lines.DTOs;
+using Lines.Entities;
 using Lines.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,15 +9,13 @@ namespace Lines.Services.PostsService
     public class PostsService : IPostsService
     {
         private readonly LinesDbContext _dbContext;
-        private readonly IMapper _mapper;
 
-        public PostsService(LinesDbContext dbContext, IMapper mapper)
+        public PostsService(LinesDbContext dbContext)
         {
             _dbContext = dbContext;
-            _mapper = mapper;
         }
 
-        public async Task<List<PostBasicInfoDTO>> GetAllPostsAsync()
+        public async Task<List<Post>> GetAllPostsAsync()
         {
             var posts = await _dbContext.Posts
                 .Include(p => p.User)
@@ -26,8 +25,7 @@ namespace Lines.Services.PostsService
                 .OrderByDescending(p => p.CreatedAt)
                 .ToListAsync();
 
-            var postDtos = _mapper.Map<List<PostBasicInfoDTO>>(posts);
-            return postDtos;
+            return posts;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Lines.DTOs;
+﻿using AutoMapper;
+using Lines.DTOs;
 using Lines.Entities;
 using Lines.Services.PostsService;
 using Microsoft.AspNetCore.Http;
@@ -11,17 +12,20 @@ namespace Lines.Controllers
     public class PostsController : ControllerBase
     {
         private readonly IPostsService _postsService;
+        private readonly IMapper _mapper;
 
-        public PostsController(IPostsService postsService)
+        public PostsController(IPostsService postsService, IMapper mapper)
         {
             _postsService = postsService;
+            _mapper = mapper;
         }
 
         [HttpGet]
         public async Task<ActionResult<List<PostBasicInfoDTO>>> GetAllPosts()
         {
             var posts = await _postsService.GetAllPostsAsync();
-            return Ok(posts);
+            var postDtos = _mapper.Map<List<PostBasicInfoDTO>>(posts);
+            return Ok(postDtos);
         }
     }
 }

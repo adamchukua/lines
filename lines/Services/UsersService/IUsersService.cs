@@ -1,9 +1,9 @@
-﻿using Lines.DTOs;
+﻿using Lines.Entities;
 
 namespace Lines.Services.UsersService
 {
     public interface IUsersService
     {
-        Task<UserWithPostsRepostsLikesDTO> GetUserAsync(string userName);
+        Task<User> GetUserAsync(string userName);
     }
 }

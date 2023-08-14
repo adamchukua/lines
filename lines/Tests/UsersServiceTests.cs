@@ -22,14 +22,7 @@ namespace Lines.Tests
                 .Options;
 
             _dbContext = new LinesDbContext(options);
-            var mapperConfig = new MapperConfiguration(cfg =>
-            {
-                cfg.AddProfile<PostProfile>();
-                cfg.AddProfile<UserProfile>();
-            });
-            var _mapper = mapperConfig.CreateMapper();
-
-            _usersService = new UsersService(_dbContext, _mapper);
+            _usersService = new UsersService(_dbContext);
         }
 
         [TearDown]
