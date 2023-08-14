@@ -52,12 +52,32 @@ namespace Lines.Infrastructure
                     new Post { Text = "ASP.NET Core is awesome!", UserId = 2, CreatedAt = DateTime.Now },
                     new Post { Text = "Twitter or X? Lines!", UserId = 3, CreatedAt = DateTime.Now },
                     new Post { Text = "Wow!", UserId = 3, CreatedAt = DateTime.Now },
+                    new Post { Text = "Just had a great coding session!", UserId = 1, CreatedAt = DateTime.Now },
+                    new Post { Text = "Learning new technologies is so exciting.", UserId = 2, CreatedAt = DateTime.Now },
+                    new Post { Text = "Working on a new project. Stay tuned!", UserId = 3, CreatedAt = DateTime.Now },
+                    new Post { Text = "Chasing my dreams, one line of code at a time.", UserId = 1, CreatedAt = DateTime.Now },
+                    new Post { Text = "Coding is my passion.", UserId = 2, CreatedAt = DateTime.Now },
+                    new Post { Text = "Always strive for excellence in your code.", UserId = 3, CreatedAt = DateTime.Now },
+                    new Post { Text = "Tech world is evolving rapidly!", UserId = 1, CreatedAt = DateTime.Now },
+                    new Post { Text = "Excited to share my latest project with you all.", UserId = 2, CreatedAt = DateTime.Now },
+                    new Post { Text = "Coding is an art.", UserId = 3, CreatedAt = DateTime.Now },
+                    new Post { Text = "Remember to stay hydrated during long coding sessions.", UserId = 1, CreatedAt = DateTime.Now },
+                    new Post { Text = "Building cool things with React.", UserId = 2, CreatedAt = DateTime.Now },
+                    new Post { Text = "Coding challenges make us better developers.", UserId = 3, CreatedAt = DateTime.Now },
+                    new Post { Text = "Just deployed my app. Feels amazing!", UserId = 1, CreatedAt = DateTime.Now },
+                    new Post { Text = "Keep calm and code on.", UserId = 2, CreatedAt = DateTime.Now },
+                    new Post { Text = "Refactoring is an essential part of coding.", UserId = 3, CreatedAt = DateTime.Now },
+                    new Post { Text = "Happy coding, everyone!", UserId = 1, CreatedAt = DateTime.Now },
+                    new Post { Text = "Code reviews help us learn and improve.", UserId = 2, CreatedAt = DateTime.Now },
+                    new Post { Text = "Coding is not just a job, it's a lifestyle.", UserId = 3, CreatedAt = DateTime.Now },
+                    new Post { Text = "Just found a clever solution to a tricky problem.", UserId = 1, CreatedAt = DateTime.Now },
+                    new Post { Text = "Sharing my coding journey on my blog.", UserId = 2, CreatedAt = DateTime.Now }
                 };
 
                 var replies = new List<Post>
                 {
                     new Post { Text = "Agree! Freedom of speech is here!", UserId = 1, RepliedPostId = 2, CreatedAt = DateTime.Now },
-                    new Post { Text = "+", UserId = 3, RepliedPostId = 2, CreatedAt = DateTime.Now },
+                    new Post { Text = "+", UserId = 2, RepliedPostId = 2, CreatedAt = DateTime.Now },
                     new Post { Text = "Maybe without russians would be better :)", UserId = 3, RepliedPostId = 5, CreatedAt = DateTime.Now },
                 };
 
