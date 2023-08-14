@@ -50,5 +50,28 @@ namespace Lines.Tests
             Assert.AreEqual(posts.Count, result.Count);
             Assert.IsTrue(result.All(p => posts.Any(expected => expected.Id == p.Id)));
         }
+
+        [Test]
+        public async Task GetUserRepliesAsync_ShouldReturnUserReplies()
+        {
+            var userName = "testuser";
+            var user = new User { Id = 1, UserName = userName, Name = "Test User" };
+            _dbContext.Users.Add(user);
+
+            var replies = new List<Post>
+            {
+                new Post { Id = 1, UserId = user.Id, Text = "Reply 1", RepliedPostId = 100, CreatedAt = DateTime.Now },
+                new Post { Id = 2, UserId = user.Id, Text = "Reply 2", RepliedPostId = 101, CreatedAt = DateTime.Now }
+            };
+            _dbContext.Posts.AddRange(replies);
+            await _dbContext.SaveChangesAsync();
+
+            var result = await _postsService.GetUserRepliesAsync(userName);
+
+            Assert.AreEqual(replies.Count, result.Count);
+            Assert.IsTrue(result.All(p => replies.Any(expected => expected.Id == p.Id)));
+            Assert.IsTrue(result.All(p => p.User.UserName == userName));
+            Assert.IsTrue(result.All(p => p.RepliedPostId != null));
+        }
     }
 }

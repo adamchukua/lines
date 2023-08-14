@@ -27,5 +27,13 @@ namespace Lines.Controllers
             var postDtos = _mapper.Map<List<PostBasicInfoDTO>>(posts);
             return Ok(postDtos);
         }
+
+        [HttpGet("GetUserReplies")]
+        public async Task<ActionResult<List<PostBasicInfoDTO>>> GetUserReplies(string userName)
+        {
+            var replies = await _postsService.GetUserRepliesAsync(userName);
+            var replyDtos = _mapper.Map<List<PostBasicInfoDTO>>(replies);
+            return Ok(replyDtos);
+        }
     }
 }

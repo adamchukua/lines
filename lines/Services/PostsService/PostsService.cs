@@ -27,5 +27,19 @@ namespace Lines.Services.PostsService
 
             return posts;
         }
+
+        public async Task<List<Post>> GetUserRepliesAsync(string userName)
+        {
+            var replies = await _dbContext.Posts
+                .Include(p => p.User)
+                .Include(p => p.Reposts)
+                .Include(p => p.Likes)
+                .Include(p => p.Replies)
+                .Where(p => p.User.UserName == userName && p.RepliedPostId != null)
+                .OrderByDescending(p => p.CreatedAt)
+                .ToListAsync();
+
+            return replies;
+        }
     }
 }
