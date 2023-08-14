@@ -22,13 +22,6 @@ namespace Lines.Services.UsersService
                 .Include(u => u.Reposts)
                 .Include(u => u.Followers)
                 .Include(u => u.Following)
-                .Include(u => u.Likes)
-                .Include(u => u.Likes)
-                    .ThenInclude(l => l.Post)
-                        .ThenInclude(p => p.User)
-                .Include(u => u.Likes)
-                    .ThenInclude(l => l.Post)
-                        .ThenInclude(p => p.Replies)
                 .FirstOrDefaultAsync(x => x.UserName == userName);
             return user;
         }

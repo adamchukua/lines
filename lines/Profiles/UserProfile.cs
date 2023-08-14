@@ -9,7 +9,7 @@ namespace Lines.Profiles
         public UserProfile()
         {
             CreateMap<UserBasicInfoDTO, User>().ReverseMap();
-            CreateMap<UserWithPostsRepostsLikesDTO, User>().ReverseMap();
+            CreateMap<UserWithPostsDTO, User>().ReverseMap();
             CreateMap<PostBasicInfoDTO, Post>().ReverseMap();
             CreateMap<Like, PostBasicInfoDTO>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Post.Id))

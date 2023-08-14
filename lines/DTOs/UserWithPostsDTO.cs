@@ -2,7 +2,7 @@
 
 namespace Lines.DTOs
 {
-    public class UserWithPostsRepostsLikesDTO
+    public class UserWithPostsDTO
     {
         [Required]
         public string Name { get; set; }
@@ -15,12 +15,8 @@ namespace Lines.DTOs
         [Required]
         public IReadOnlyList<PostBasicInfoDTO> Posts { get; set; }
         [Required]
-        public IReadOnlyList<RepostBasicInfoDTO> Reposts { get; set; }
-        [Required]
         public int FollowersCount { get; set; }
         [Required]
         public int FollowingCount { get; set; }
-        [Required]
-        public IReadOnlyList<PostBasicInfoDTO> Likes { get; set; }
     }
 }

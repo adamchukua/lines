@@ -19,7 +19,7 @@ namespace Lines.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<UserWithPostsRepostsLikesDTO>> GetUser(string userName)
+        public async Task<ActionResult<UserWithPostsDTO>> GetUser(string userName)
         {
             var user = await _usersService.GetUserAsync(userName);
 
@@ -28,7 +28,7 @@ namespace Lines.Controllers
                 return NotFound();
             }
 
-            var userDto = _mapper.Map<UserWithPostsRepostsLikesDTO>(user);
+            var userDto = _mapper.Map<UserWithPostsDTO>(user);
             return Ok(userDto);
         }
     }
