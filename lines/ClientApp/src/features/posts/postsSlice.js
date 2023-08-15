@@ -9,9 +9,19 @@ const initialState = {
 
 export const fetchPosts = createAsyncThunk(
     "posts/fetchPosts",
-    async () => {
+    async(data) => {
+        let url = `/api/Posts`;
+
+        if (data?.pageNumber) {
+            url += `?pageNumber=${data?.pageNumber}`;
+
+            if (data?.pageSize) {
+                url += `&pageSize=${data?.pageSize}`;
+            }
+        }
+
         return axios
-            .get("/api/Posts/")
+            .get(url)
             .then((response) => response.data);
     });
 
@@ -29,7 +39,7 @@ const postsSlice = createSlice({
             })
             .addCase(fetchPosts.fulfilled, (state, action) => {
                 state.status = "succeeded";
-                state.posts = action.payload;
+                state.posts.push(...action.payload);
             })
             .addCase(fetchPosts.rejected, (state, action) => {
                 state.status = "failed";
