@@ -21,9 +21,9 @@ namespace Lines.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<PostBasicInfoDTO>>> GetAllPosts()
+        public async Task<ActionResult<List<PostBasicInfoDTO>>> GetAllPosts(int pageNumber = 1, int pageSize = 10)
         {
-            var posts = await _postsService.GetAllPostsAsync();
+            var posts = await _postsService.GetAllPostsAsync(pageNumber, pageSize);
             var postDtos = _mapper.Map<List<PostBasicInfoDTO>>(posts);
             return Ok(postDtos);
         }
