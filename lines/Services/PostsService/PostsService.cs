@@ -15,7 +15,7 @@ namespace Lines.Services.PostsService
             _dbContext = dbContext;
         }
 
-        public async Task<List<Post>> GetAllPostsAsync()
+        public async Task<List<Post>> GetAllPostsAsync(int pageNumber, int pageSize)
         {
             var posts = await _dbContext.Posts
                 .Include(p => p.User)
@@ -23,6 +23,8 @@ namespace Lines.Services.PostsService
                 .Include(p => p.Likes)
                 .Include(p => p.Replies)
                 .OrderByDescending(p => p.CreatedAt)
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
                 .ToListAsync();
 
             return posts;
