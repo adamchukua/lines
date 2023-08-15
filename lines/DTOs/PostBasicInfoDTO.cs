@@ -9,7 +9,7 @@ namespace Lines.DTOs
         [Required(ErrorMessage = "Text is required")]
         [MaxLength(300, ErrorMessage = "Max length for post's text is 300 symbols")]
         public string Text { get; set; }
-        public long? RepliedPostId { get; set; }
+        public PostBasicInfoDTO? ParentPost { get; set; }
         [Required]
         public DateTime CreatedAt { get; set; }
         [Required]
