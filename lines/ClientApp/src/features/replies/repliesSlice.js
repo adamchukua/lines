@@ -11,7 +11,7 @@ export const fetchUserReplies = createAsyncThunk(
     "replies/fetchUserReplies",
     async (userName) => {
         return axios
-            .get(`/api/Posts/GetUserReplies?userName=${userName}`)
+            .get(`/api/Posts/GetUserReplies/${userName}`)
             .then((response) => response.data);
     });
 

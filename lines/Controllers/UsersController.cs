@@ -18,7 +18,7 @@ namespace Lines.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet]
+        [HttpGet("{userName}")]
         public async Task<ActionResult<UserWithPostsDTO>> GetUser(string userName)
         {
             var user = await _usersService.GetUserAsync(userName);

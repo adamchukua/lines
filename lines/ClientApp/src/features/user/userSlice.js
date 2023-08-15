@@ -11,7 +11,7 @@ export const fetchUser = createAsyncThunk(
     "user/fetchUser",
     async (userName) => {
         return axios
-            .get(`/api/Users?userName=${userName}`)
+            .get(`/api/Users/${userName}`)
             .then((response) => response.data);
     });
 
