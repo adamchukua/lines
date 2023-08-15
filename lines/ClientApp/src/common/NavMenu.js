@@ -3,7 +3,7 @@ import NewPostModal from "./NewPostModal";
 export default function NavMenu() {
     return (
         <>
-            <nav>
+            <nav className="pos-fix">
                 <img src="images/logo_big.svg" className="logo" alt="lines" />
 
                 <ul className="menu-list my-4">
