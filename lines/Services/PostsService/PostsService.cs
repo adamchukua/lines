@@ -22,6 +22,7 @@ namespace Lines.Services.PostsService
                 .Include(p => p.Reposts)
                 .Include(p => p.Likes)
                 .Include(p => p.Replies)
+                .Include(p => p.ParentPost)
                 .OrderByDescending(p => p.CreatedAt)
                 .Skip((pageNumber - 1) * pageSize)
                 .Take(pageSize)
