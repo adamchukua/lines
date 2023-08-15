@@ -45,7 +45,7 @@ namespace Lines.Tests
             _dbContext.Posts.AddRange(posts);
             await _dbContext.SaveChangesAsync();
 
-            var result = await _postsService.GetAllPostsAsync();
+            var result = await _postsService.GetAllPostsAsync(1, 10);
 
             Assert.AreEqual(posts.Count, result.Count);
             Assert.IsTrue(result.All(p => posts.Any(expected => expected.Id == p.Id)));
