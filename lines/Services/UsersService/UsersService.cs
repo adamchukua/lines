@@ -3,6 +3,8 @@ using Lines.DTOs;
 using Lines.Entities;
 using Lines.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace Lines.Services.UsersService
 {
@@ -24,6 +26,16 @@ namespace Lines.Services.UsersService
                 .Include(u => u.Following)
                 .FirstOrDefaultAsync(x => x.UserName == userName);
             return user;
+        }
+
+        public async Task<List<User>> SearchUsersAsync(string searchQuery)
+        {
+            var users = await _dbContext.Users
+                .Where(u => EF.Functions.Like(u.UserName.ToLower(), $"%{searchQuery}%") ||
+                            EF.Functions.Like(u.UserName.ToLower(), $"%{searchQuery}%"))
+                .ToListAsync();
+
+            return users;
         }
     }
 }
