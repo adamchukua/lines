@@ -35,5 +35,21 @@ namespace Lines.Controllers
             var replyDtos = _mapper.Map<List<PostBasicInfoDTO>>(replies);
             return Ok(replyDtos);
         }
+
+        [HttpGet("{postId}")]
+        public async Task<ActionResult<List<PostBasicInfoDTO>>> GetPost(long postId)
+        {
+            var post = await _postsService.GetPostAsync(postId);
+            var postDto = _mapper.Map<PostBasicInfoDTO>(post);
+            return Ok(postDto);
+        }
+
+        [HttpGet("GetPostReplies/{postId}")]
+        public async Task<ActionResult<List<PostBasicInfoDTO>>> GetPostReplies(long postId)
+        {
+            var replies = await _postsService.GetPostRepliesAsync(postId);
+            var replyDtos = _mapper.Map<List<PostBasicInfoDTO>>(replies);
+            return Ok(replyDtos);
+        }
     }
 }

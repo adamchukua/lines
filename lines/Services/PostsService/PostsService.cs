@@ -44,5 +44,35 @@ namespace Lines.Services.PostsService
 
             return replies;
         }
+
+        public async Task<Post> GetPostAsync(long postId)
+        {
+            var post = await _dbContext.Posts
+                .Include(p => p.User)
+                .Include(p => p.Reposts)
+                .Include(p => p.Likes)
+                .Include(p => p.Replies)
+                .Include(p => p.ParentPost)
+                .ThenInclude(p => p.User)
+                .Where(p => p.Id == postId)
+                .OrderByDescending(p => p.CreatedAt)
+                .SingleAsync();
+
+            return post;
+        }
+
+        public async Task<List<Post>> GetPostRepliesAsync(long postId)
+        {
+            var replies = await _dbContext.Posts
+                .Include(p => p.User)
+                .Include(p => p.Reposts)
+                .Include(p => p.Likes)
+                .Include(p => p.Replies)
+                .Where(p => p.RepliedPostId == postId)
+                .OrderByDescending(p => p.CreatedAt)
+                .ToListAsync();
+
+            return replies;
+        }
     }
 }
