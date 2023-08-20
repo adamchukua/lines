@@ -1,4 +1,4 @@
-export default function Post({ isThread, post }) {
+export default function Post({ isThread, isMainPost, post }) {
     const getHumanReadableTime = (datetime) => {
         const now = new Date();
         const timeDifference = now - datetime;
@@ -30,10 +30,12 @@ export default function Post({ isThread, post }) {
     return (
         <>
             {post && (
-                <article className="media">
+                <article className="media" style={isMainPost ? { fontSize: "1.2rem" } : {}}>
                     <div className="media-left">
                         <figure className="image is-64x64">
-                            <img src={`/images/avatars/${post.user.avatar}`} className="is-rounded" alt="Image" />
+                            <a href={`profile/${post.user?.userName}`}>
+                                <img src={`/images/avatars/${post.user?.avatar}`} className="is-rounded" alt="Image" />
+                            </a>
 
                             {isThread && (<div className="thread-line"></div>)}
                         </figure>
@@ -42,18 +44,18 @@ export default function Post({ isThread, post }) {
                     <div className="media-content">
                         <div className="content">
                             <div className="is-flex is-justify-content-space-between">
-                                <a href={`profile/${post.user.userName}`}>
-                                    <strong>{post.user.name}</strong> <small>@{post.user.userName}</small>
+                                <a href={`profile/${post.user?.userName}`}>
+                                    <strong>{post?.user?.name}</strong> <small>@{post.user?.userName}</small>
                                 </a>
 
                                 <p>
-                                    <small>{getHumanReadableTime(new Date(post.createdAt))}</small>
+                                    <small>{getHumanReadableTime(new Date(post?.createdAt))}</small>
                                 </p>
                             </div>
 
-                            <p>
-                                {post.text}
-                            </p>
+                            <a href={`profile/${post.user?.userName}/post/${post?.id}`}>
+                                {post?.text}
+                            </a>
                         </div>
 
                         <nav className="level is-mobile mt-5">
@@ -63,7 +65,7 @@ export default function Post({ isThread, post }) {
                                         <i className="fas fa-reply" aria-hidden="true"></i>
                                     </span>
 
-                                    <p className="ml-2">{post.repliesCount}</p>
+                                    <p className="ml-2">{post?.repliesCount}</p>
                                 </a>
 
                                 <a className="level-item text-black" aria-label="retweet">
@@ -71,7 +73,7 @@ export default function Post({ isThread, post }) {
                                         <i className="fas fa-retweet" aria-hidden="true"></i>
                                     </span>
 
-                                    <p className="ml-2">{post.repostsCount}</p>
+                                    <p className="ml-2">{post?.repostsCount}</p>
                                 </a>
 
                                 <a className="level-item text-black" aria-label="like">
@@ -79,7 +81,7 @@ export default function Post({ isThread, post }) {
                                         <i className="fas fa-heart" aria-hidden="true"></i>
                                     </span>
 
-                                    <p className="ml-2">{post.likesCount}</p>
+                                    <p className="ml-2">{post?.likesCount}</p>
                                 </a>
 
                                 <a className="level-item text-black" aria-label="share">
