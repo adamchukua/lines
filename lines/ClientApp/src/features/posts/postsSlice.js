@@ -25,6 +25,14 @@ export const fetchPosts = createAsyncThunk(
             .then((response) => response.data);
     });
 
+export const fetchPost = createAsyncThunk(
+    "posts/fetchPost",
+    async ({ userName, postId }) => {
+        return axios
+            .get(`/api/Posts/${postId}`)
+            .then((response) => response.data);
+    });
+
 const postsSlice = createSlice({
     name: "posts",
     initialState,
@@ -42,6 +50,18 @@ const postsSlice = createSlice({
                 state.posts.push(...action.payload);
             })
             .addCase(fetchPosts.rejected, (state, action) => {
+                state.status = "failed";
+                state.error = action.error.message;
+            })
+            // fetchPost
+            .addCase(fetchPost.pending, (state, action) => {
+                state.status = "loading";
+            })
+            .addCase(fetchPost.fulfilled, (state, action) => {
+                state.status = "succeeded";
+                state.posts = action.payload;
+            })
+            .addCase(fetchPost.rejected, (state, action) => {
                 state.status = "failed";
                 state.error = action.error.message;
             });
