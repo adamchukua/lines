@@ -46,7 +46,7 @@ export default function ProfilePage() {
             </div>
 
             {selectedTab === "posts" && (
-                <PostsList posts={user.user.posts?.filter(p => p.repliedPostId === null)} />
+                <PostsList posts={user.user.posts?.filter(p => p.parentPost === null)} />
             )}
 
             <DataDisplay status={replies.status} error={replies.error}>

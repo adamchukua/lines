@@ -6,5 +6,7 @@ namespace Lines.Services.PostsService
     {
         Task<List<Post>> GetAllPostsAsync(int pageNumber, int pageSize);
         Task<List<Post>> GetUserRepliesAsync(string userName);
+        Task<Post> GetPostAsync(long postId);
+        Task<List<Post>> GetPostRepliesAsync(long postId);
     }
 }

@@ -10,7 +10,7 @@ const AppRoutes = [
         element: <Home />
     },
     {
-        path: "/post",
+        path: "/profile/:userName/post/:postId",
         element: <PostPage />
     },
     {
