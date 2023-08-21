@@ -60,5 +60,50 @@ namespace Lines.Tests
 
             Assert.Null(userDto);
         }
+
+        [Test]
+        public async Task SearchUsersAsync_ExistingUsers_ReturnsMatchingUsers()
+        {
+            var user1 = new User
+            {
+                UserName = "userone",
+                Name = "User One",
+                Description = "This is User One",
+                Avatar = "avatar1.jpg",
+                Email = "user1@example.com",
+                EmailConfirmed = true
+            };
+
+            var user2 = new User
+            {
+                UserName = "usertwo",
+                Name = "User Two",
+                Description = "This is User Two",
+                Avatar = "avatar2.jpg",
+                Email = "user2@example.com",
+                EmailConfirmed = true
+            };
+
+            _dbContext.Users.AddRange(user1, user2);
+            _dbContext.SaveChanges();
+
+            var searchQuery = "user";
+
+            var matchingUsers = await _usersService.SearchUsersAsync(searchQuery);
+
+            Assert.AreEqual(2, matchingUsers.Count);
+            CollectionAssert.Contains(matchingUsers, user1);
+            CollectionAssert.Contains(matchingUsers, user2);
+        }
+
+        [Test]
+        public async Task SearchUsersAsync_NonExistentUsers_ReturnsEmptyList()
+        {
+            var searchQuery = "nonexistentuser";
+
+            var matchingUsers = await _usersService.SearchUsersAsync(searchQuery);
+
+            Assert.IsEmpty(matchingUsers);
+        }
     }
 }
