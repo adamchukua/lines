@@ -73,5 +73,27 @@ namespace Lines.Tests
             Assert.IsTrue(result.All(p => p.User.UserName == userName));
             Assert.IsTrue(result.All(p => p.RepliedPostId != null));
         }
+
+        [Test]
+        public async Task SearchPostsAsync_ShouldReturnMatchingPosts()
+        {
+            var user = new User { Id = 1, UserName = "testuser", Name = "testuser" };
+            _dbContext.Users.Add(user);
+
+            var posts = new List<Post>
+            {
+                new Post { Id = 1, UserId = user.Id, Text = "Test post 1", CreatedAt = DateTime.Now },
+                new Post { Id = 2, UserId = user.Id, Text = "Test post 2", CreatedAt = DateTime.Now }
+            };
+            _dbContext.Posts.AddRange(posts);
+            await _dbContext.SaveChangesAsync();
+
+            var searchQuery = "Test post";
+
+            var result = await _postsService.SearchPostsAsync(searchQuery);
+
+            Assert.AreEqual(posts.Count, result.Count);
+            Assert.IsTrue(result.All(p => posts.Any(expected => expected.Id == p.Id)));
+        }
     }
 }
