@@ -1,3 +1,5 @@
+import { CornerUpLeft, Repeat, Heart, Share } from 'react-feather';
+
 export default function Post({ isThread, isMainPost, post }) {
     const getHumanReadableTime = (datetime) => {
         const now = new Date();
@@ -60,34 +62,26 @@ export default function Post({ isThread, isMainPost, post }) {
 
                         <nav className="level is-mobile mt-5">
                             <div className="level-left">
-                                <a className="level-item text-black" aria-label="reply">
-                                    <span className="icon is-small">
-                                        <i className="fas fa-reply" aria-hidden="true"></i>
-                                    </span>
+                                <a className="level-item text-black">
+                                    <CornerUpLeft size={20} />
 
                                     <p className="ml-2">{post?.repliesCount}</p>
                                 </a>
 
-                                <a className="level-item text-black" aria-label="retweet">
-                                    <span className="icon is-small">
-                                        <i className="fas fa-retweet" aria-hidden="true"></i>
-                                    </span>
+                                <a className="level-item text-black">
+                                    <Repeat size={20} />
 
                                     <p className="ml-2">{post?.repostsCount}</p>
                                 </a>
 
-                                <a className="level-item text-black" aria-label="like">
-                                    <span className="icon is-small">
-                                        <i className="fas fa-heart" aria-hidden="true"></i>
-                                    </span>
+                                <a className="level-item text-black">
+                                    <Heart size={20} />
 
                                     <p className="ml-2">{post?.likesCount}</p>
                                 </a>
 
-                                <a className="level-item text-black" aria-label="share">
-                                    <span className="icon is-small">
-                                        <i className="fas fa-share" aria-hidden="true"></i>
-                                    </span>
+                                <a className="level-item text-black">
+                                    <Share size={20} />
 
                                     <p className="ml-2">0</p>
                                 </a>

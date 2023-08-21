@@ -32,11 +32,11 @@ namespace Lines.Tests
         }
 
         [Test]
-        public async Task GetUserAsync_ExistingUser_ReturnsUserDto()
+        public async Task GetUserAsync_ExistingUser_ReturnsUser()
         {
             var user = new User
             {
-                UserName = "userone",
+                UserName = "userone111",
                 Name = "User One",
                 Description = "This is User One",
                 Avatar = "avatar1.jpg",
@@ -59,6 +59,51 @@ namespace Lines.Tests
             var userDto = await _usersService.GetUserAsync(nonExistentUserName);
 
             Assert.Null(userDto);
+        }
+
+        [Test]
+        public async Task SearchUsersAsync_ExistingUsers_ReturnsMatchingUsers()
+        {
+            var user1 = new User
+            {
+                UserName = "userone",
+                Name = "User One",
+                Description = "This is User One",
+                Avatar = "avatar1.jpg",
+                Email = "user1@example.com",
+                EmailConfirmed = true
+            };
+
+            var user2 = new User
+            {
+                UserName = "usertwo",
+                Name = "User Two",
+                Description = "This is User Two",
+                Avatar = "avatar2.jpg",
+                Email = "user2@example.com",
+                EmailConfirmed = true
+            };
+
+            _dbContext.Users.AddRange(user1, user2);
+            _dbContext.SaveChanges();
+
+            var searchQuery = "user";
+
+            var matchingUsers = await _usersService.SearchUsersAsync(searchQuery, 2);
+
+            Assert.AreEqual(2, matchingUsers.Count);
+            CollectionAssert.Contains(matchingUsers, user1);
+            CollectionAssert.Contains(matchingUsers, user2);
+        }
+
+        [Test]
+        public async Task SearchUsersAsync_NonExistentUsers_ReturnsEmptyList()
+        {
+            var searchQuery = "nonexistentuser";
+
+            var matchingUsers = await _usersService.SearchUsersAsync(searchQuery, 1);
+
+            Assert.IsEmpty(matchingUsers);
         }
     }
 }

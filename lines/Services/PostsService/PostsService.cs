@@ -74,5 +74,18 @@ namespace Lines.Services.PostsService
 
             return replies;
         }
+
+        public Task<List<Post>> SearchPostsAsync(string searchQuery)
+        {
+            var posts = _dbContext.Posts
+                .Include(p => p.User)
+                .Include(p => p.Reposts)
+                .Include(p => p.Likes)
+                .Include(p => p.Replies)
+                .Where(p => EF.Functions.Like(p.Text.ToLower(), $"%{searchQuery.ToLower()}%"))
+                .ToListAsync();
+
+            return posts;
+        }
     }
 }

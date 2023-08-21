@@ -31,5 +31,19 @@ namespace Lines.Controllers
             var userDto = _mapper.Map<UserWithPostsDTO>(user);
             return Ok(userDto);
         }
+
+        [HttpGet("Search/{searchQuery}")]
+        public async Task<ActionResult<List<UserWithPostsDTO>>> SearchUsers(string searchQuery, int count = 7)
+        {
+            var users = await _usersService.SearchUsersAsync(searchQuery, count);
+
+            if (users == null)
+            {
+                return NotFound();
+            }
+
+            var userDtos = _mapper.Map<List<UserWithPostsDTO>>(users);
+            return Ok(userDtos);
+        }
     }
 }
