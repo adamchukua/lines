@@ -28,11 +28,12 @@ namespace Lines.Services.UsersService
             return user;
         }
 
-        public async Task<List<User>> SearchUsersAsync(string searchQuery)
+        public async Task<List<User>> SearchUsersAsync(string searchQuery, int count)
         {
             var users = await _dbContext.Users
                 .Where(u => EF.Functions.Like(u.UserName.ToLower(), $"%{searchQuery.ToLower()}%") ||
                             EF.Functions.Like(u.Name.ToLower(), $"%{searchQuery.ToLower()}%"))
+                .Take(count)
                 .ToListAsync();
 
             return users;
