@@ -32,11 +32,11 @@ namespace Lines.Tests
         }
 
         [Test]
-        public async Task GetUserAsync_ExistingUser_ReturnsUserDto()
+        public async Task GetUserAsync_ExistingUser_ReturnsUser()
         {
             var user = new User
             {
-                UserName = "userone",
+                UserName = "userone111",
                 Name = "User One",
                 Description = "This is User One",
                 Avatar = "avatar1.jpg",
