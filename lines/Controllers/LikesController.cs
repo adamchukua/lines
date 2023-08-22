@@ -3,6 +3,7 @@ using Lines.DTOs;
 using Lines.Services.ILikesService;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Lines.Controllers
 {
@@ -23,6 +24,12 @@ namespace Lines.Controllers
         public async Task<ActionResult<List<PostBasicInfoDTO>>> GetUserLikes(string userName)
         {
             var likes = await _likesService.GetUserLikesAsync(userName);
+
+            if (likes.IsNullOrEmpty())
+            {
+                return NotFound();
+            }
+
             var postDtos = _mapper.Map<List<PostBasicInfoDTO>>(likes);
             return Ok(postDtos);
         }

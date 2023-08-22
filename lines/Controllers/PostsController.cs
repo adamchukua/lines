@@ -4,6 +4,7 @@ using Lines.Entities;
 using Lines.Services.PostsService;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Lines.Controllers
 {
@@ -24,6 +25,12 @@ namespace Lines.Controllers
         public async Task<ActionResult<List<PostBasicInfoDTO>>> GetAllPosts(int pageNumber = 1, int pageSize = 10)
         {
             var posts = await _postsService.GetAllPostsAsync(pageNumber, pageSize);
+
+            if (posts.IsNullOrEmpty())
+            {
+                return NotFound();
+            }
+
             var postDtos = _mapper.Map<List<PostBasicInfoDTO>>(posts);
             return Ok(postDtos);
         }
@@ -32,6 +39,12 @@ namespace Lines.Controllers
         public async Task<ActionResult<List<PostBasicInfoDTO>>> GetUserReplies(string userName)
         {
             var replies = await _postsService.GetUserRepliesAsync(userName);
+
+            if (replies.IsNullOrEmpty())
+            {
+                return NotFound();
+            }
+
             var replyDtos = _mapper.Map<List<PostBasicInfoDTO>>(replies);
             return Ok(replyDtos);
         }
@@ -40,6 +53,12 @@ namespace Lines.Controllers
         public async Task<ActionResult<List<PostBasicInfoDTO>>> GetPost(long postId)
         {
             var post = await _postsService.GetPostAsync(postId);
+
+            if (post == null)
+            {
+                return NotFound();
+            }
+
             var postDto = _mapper.Map<PostBasicInfoDTO>(post);
             return Ok(postDto);
         }
@@ -48,6 +67,12 @@ namespace Lines.Controllers
         public async Task<ActionResult<List<PostBasicInfoDTO>>> GetPostReplies(long postId)
         {
             var replies = await _postsService.GetPostRepliesAsync(postId);
+
+            if (replies.IsNullOrEmpty())
+            {
+                return NotFound();
+            }
+
             var replyDtos = _mapper.Map<List<PostBasicInfoDTO>>(replies);
             return Ok(replyDtos);
         }
@@ -56,6 +81,12 @@ namespace Lines.Controllers
         public async Task<ActionResult<List<PostBasicInfoDTO>>> SearchPosts(string searchQuery)
         {
             var posts = await _postsService.SearchPostsAsync(searchQuery);
+
+            if (posts.IsNullOrEmpty())
+            {
+                return NotFound();
+            }
+
             var postDtos = _mapper.Map<List<PostBasicInfoDTO>>(posts);
             return Ok(postDtos);
         }

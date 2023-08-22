@@ -2,6 +2,7 @@
 using Lines.DTOs;
 using Lines.Services.UsersService;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Lines.Controllers
 {
@@ -37,7 +38,7 @@ namespace Lines.Controllers
         {
             var users = await _usersService.SearchUsersAsync(searchQuery, count);
 
-            if (users == null)
+            if (users.IsNullOrEmpty())
             {
                 return NotFound();
             }
