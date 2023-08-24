@@ -21,9 +21,15 @@ export default function ProfilePage() {
     }, [dispatch]);
 
     useEffect(() => {
-        dispatch(fetchUserReplies(user.user?.userName));
-        dispatch(fetchUserLikes(user.user?.userName));
-    }, [user.user.userName]);
+        switch (selectedTab) {
+            case "replies":
+                dispatch(fetchUserReplies(user.user?.userName));
+                break;
+            case "likes":
+                dispatch(fetchUserLikes(user.user?.userName));
+                break;
+        }
+    }, [user.user.userName, selectedTab]);
 
     return (
         <DataDisplay status={user.status} error={user.error}>
