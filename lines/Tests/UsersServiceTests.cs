@@ -89,7 +89,7 @@ namespace Lines.Tests
 
             var searchQuery = "user";
 
-            var matchingUsers = await _usersService.SearchUsersAsync(searchQuery, 2);
+            var matchingUsers = await _usersService.SearchUsersAsync(searchQuery, 1, 10);
 
             Assert.AreEqual(2, matchingUsers.Count);
             CollectionAssert.Contains(matchingUsers, user1);
@@ -101,7 +101,7 @@ namespace Lines.Tests
         {
             var searchQuery = "nonexistentuser";
 
-            var matchingUsers = await _usersService.SearchUsersAsync(searchQuery, 1);
+            var matchingUsers = await _usersService.SearchUsersAsync(searchQuery, 1, 10);
 
             Assert.IsEmpty(matchingUsers);
         }

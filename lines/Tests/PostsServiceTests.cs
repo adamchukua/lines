@@ -90,7 +90,7 @@ namespace Lines.Tests
 
             var searchQuery = "Test post";
 
-            var result = await _postsService.SearchPostsAsync(searchQuery);
+            var result = await _postsService.SearchPostsAsync(searchQuery, 1, 10);
 
             Assert.AreEqual(posts.Count, result.Count);
             Assert.IsTrue(result.All(p => posts.Any(expected => expected.Id == p.Id)));
