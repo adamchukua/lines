@@ -78,9 +78,9 @@ namespace Lines.Controllers
         }
 
         [HttpGet("Search/{searchQuery}")]
-        public async Task<ActionResult<List<PostBasicInfoDTO>>> SearchPosts(string searchQuery)
+        public async Task<ActionResult<List<PostBasicInfoDTO>>> SearchPosts(string searchQuery, int pageNumber = 1, int pageSize = 10)
         {
-            var posts = await _postsService.SearchPostsAsync(searchQuery);
+            var posts = await _postsService.SearchPostsAsync(searchQuery, pageNumber, pageSize);
 
             if (posts.IsNullOrEmpty())
             {

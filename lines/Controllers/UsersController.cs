@@ -34,9 +34,9 @@ namespace Lines.Controllers
         }
 
         [HttpGet("Search/{searchQuery}")]
-        public async Task<ActionResult<List<UserWithPostsDTO>>> SearchUsers(string searchQuery, int count = 7)
+        public async Task<ActionResult<List<UserWithPostsDTO>>> SearchUsers(string searchQuery, int pageNumber = 1, int pageSize = 7)
         {
-            var users = await _usersService.SearchUsersAsync(searchQuery, count);
+            var users = await _usersService.SearchUsersAsync(searchQuery, pageNumber, pageSize);
 
             if (users.IsNullOrEmpty())
             {
