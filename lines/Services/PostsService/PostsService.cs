@@ -3,6 +3,7 @@ using Lines.DTOs;
 using Lines.Entities;
 using Lines.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
+using System.Drawing.Printing;
 
 namespace Lines.Services.PostsService
 {
@@ -75,7 +76,7 @@ namespace Lines.Services.PostsService
             return replies;
         }
 
-        public Task<List<Post>> SearchPostsAsync(string searchQuery)
+        public Task<List<Post>> SearchPostsAsync(string searchQuery, int pageNumber, int pageSize)
         {
             var posts = _dbContext.Posts
                 .Include(p => p.User)
@@ -83,6 +84,8 @@ namespace Lines.Services.PostsService
                 .Include(p => p.Likes)
                 .Include(p => p.Replies)
                 .Where(p => EF.Functions.Like(p.Text.ToLower(), $"%{searchQuery.ToLower()}%"))
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
                 .ToListAsync();
 
             return posts;
