@@ -46,7 +46,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Resources\" />
+    <EmbeddedResource Remove="Resources\ValidationResources.en.resx" />
+    <EmbeddedResource Remove="Resources\ValidationResources.uk.resx" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Resources\ValidationResources.uk.resx" />
+    <None Include="Resources\ValidationResources.en.resx" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

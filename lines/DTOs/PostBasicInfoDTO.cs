@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Lines.Resources;
 
 namespace Lines.DTOs
 {
@@ -6,8 +7,8 @@ namespace Lines.DTOs
     {
         [Required]
         public long Id { get; set; }
-        [Required(ErrorMessage = "Text is required")]
-        [MaxLength(300, ErrorMessage = "Max length for post's text is 300 symbols")]
+        [Required(ErrorMessageResourceName = "TextRequired", ErrorMessageResourceType = typeof(ValidationResources))]
+        [MaxLength(300, ErrorMessageResourceName = "MaxLengthPost", ErrorMessageResourceType = typeof(ValidationResources))]
         public string Text { get; set; }
         public PostBasicInfoDTO? ParentPost { get; set; }
         [Required]

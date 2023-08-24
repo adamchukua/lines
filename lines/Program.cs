@@ -24,6 +24,10 @@ builder.Services.AddIdentity<User, IdentityRole<long>>()
 builder.Services.AddControllersWithViews();
 builder.Services.AddSwaggerGen();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
+builder.Services
+    .AddMvc()
+    .AddDataAnnotationsLocalization();
 builder.Services.AddScoped<IPostsService, PostsService>();
 builder.Services.AddScoped<IUsersService, UsersService>();
 builder.Services.AddScoped<ILikesService, LikesService>();
