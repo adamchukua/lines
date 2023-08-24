@@ -9,9 +9,19 @@ const initialState = {
 
 export const searchUsers = createAsyncThunk(
     "searchUsers/searchUsers",
-    async (userName) => {
+    async (data) => {
+        let url = `/api/Users/Search/${data?.query}`;
+
+        if (data?.pageNumber) {
+            url += `?pageNumber=${data?.pageNumber}`;
+
+            if (data?.pageSize) {
+                url += `&pageSize=${data?.pageSize}`;
+            }
+        }
+
         return axios
-            .get(`/api/Users/Search/${userName}`)
+            .get(url)
             .then((response) => response.data);
     });
 
