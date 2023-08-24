@@ -7,9 +7,10 @@ export default function Thread({ isFullThread, hasMainPost, posts }) {
                 <Post
                     isThread={posts.length - 1 !== index ? true : isFullThread}
                     post={post}
-                    key={post?.id}
+                    key={index}
                     isMainPost={hasMainPost && index === posts.length - 1} />
             ))}
         </>
     );
 }
+    

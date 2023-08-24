@@ -4,8 +4,8 @@ import User from "./User";
 export default function UsersList({ users }) {
     return (
         <>
-            {users?.map((user) => (
-                <React.Fragment key={user.id}>
+            {users?.map((user, index) => (
+                <React.Fragment key={index}>
                     <User user={user} />
                 </React.Fragment>
             ))}
