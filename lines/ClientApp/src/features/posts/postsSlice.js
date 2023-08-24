@@ -27,9 +27,27 @@ export const fetchPosts = createAsyncThunk(
 
 export const fetchPost = createAsyncThunk(
     "posts/fetchPost",
-    async ({ userName, postId }) => {
+    async ({ postId }) => {
         return axios
             .get(`/api/Posts/${postId}`)
+            .then((response) => response.data);
+    });
+
+export const searchPosts = createAsyncThunk(
+    "posts/searchPosts",
+    async (data) => {
+        let url = `/api/Posts/Search/${data?.query}`;
+
+        if (data?.pageNumber) {
+            url += `?pageNumber=${data?.pageNumber}`;
+
+            if (data?.pageSize) {
+                url += `&pageSize=${data?.pageSize}`;
+            }
+        }
+
+        return axios
+            .get(url)
             .then((response) => response.data);
     });
 
@@ -37,7 +55,9 @@ const postsSlice = createSlice({
     name: "posts",
     initialState,
     reducers: {
-        // reducers
+        clear: (state) => {
+            state.posts = [];
+        }
     },
     extraReducers(builder) {
         builder
@@ -64,10 +84,22 @@ const postsSlice = createSlice({
             .addCase(fetchPost.rejected, (state, action) => {
                 state.status = "failed";
                 state.error = action.error.message;
+            })
+            // searchPosts
+            .addCase(searchPosts.pending, (state, action) => {
+                state.status = "loading";
+            })
+            .addCase(searchPosts.fulfilled, (state, action) => {
+                state.status = "succeeded";
+                state.posts = action.payload;
+            })
+            .addCase(searchPosts.rejected, (state, action) => {
+                state.status = "failed";
+                state.error = action.error.message;
             });
     }
 });
 
-export const { } = postsSlice.actions;
+export const { clear } = postsSlice.actions;
 
 export default postsSlice.reducer;

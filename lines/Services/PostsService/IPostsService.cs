@@ -8,6 +8,6 @@ namespace Lines.Services.PostsService
         Task<List<Post>> GetUserRepliesAsync(string userName);
         Task<Post> GetPostAsync(long postId);
         Task<List<Post>> GetPostRepliesAsync(long postId);
-        Task<List<Post>> SearchPostsAsync(string searchQuery);
+        Task<List<Post>> SearchPostsAsync(string searchQuery, int pageNumber, int pageSize);
     }
 }

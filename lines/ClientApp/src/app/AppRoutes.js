@@ -3,6 +3,7 @@ import NotificationsPage from "../features/notifications/NotificationsPage";
 import PostPage from "../common/PostPage";
 import ProfilePage from "../common/ProfilePage";
 import SettingsPage from "../common/SettingsPage";
+import SearchPage from "../common/SearchPage";
 
 const AppRoutes = [
     {
@@ -24,6 +25,10 @@ const AppRoutes = [
     {
         path: "/profile/:userName",
         element: <ProfilePage />
+    },
+    {
+        path: "/search",
+        element: <SearchPage />
     }
 ];
 
