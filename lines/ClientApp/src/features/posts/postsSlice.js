@@ -10,7 +10,7 @@ const initialState = {
 export const fetchPosts = createAsyncThunk(
     "posts/fetchPosts",
     async(data) => {
-        let url = `/api/Posts`;
+        let url = `https://localhost:7122/api/Posts`;
 
         if (data?.pageNumber) {
             url += `?pageNumber=${data?.pageNumber}`;
@@ -29,14 +29,14 @@ export const fetchPost = createAsyncThunk(
     "posts/fetchPost",
     async ({ postId }) => {
         return axios
-            .get(`/api/Posts/${postId}`)
+            .get(`https://localhost:7122/api/Posts/${postId}`)
             .then((response) => response.data);
     });
 
 export const searchPosts = createAsyncThunk(
     "posts/searchPosts",
     async (data) => {
-        let url = `/api/Posts/Search/${data?.query}`;
+        let url = `https://localhost:7122/api/Posts/Search/${data?.query}`;
 
         if (data?.pageNumber) {
             url += `?pageNumber=${data?.pageNumber}`;
