@@ -11,7 +11,7 @@ export const fetchNotifications = createAsyncThunk(
     "notifications/fetchNotifications",
     async () => {
         return axios
-            .get("/api/Notifications/")
+            .get("https://localhost:7122/api/Notifications/")
             .then((response) => response.data);
     });
 

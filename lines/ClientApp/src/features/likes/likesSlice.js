@@ -11,7 +11,7 @@ export const fetchUserLikes = createAsyncThunk(
     "likes/fetchUserLikes",
     async (userName) => {
         return axios
-            .get(`/api/Likes/${userName}`)
+            .get(`https://localhost:7122/api/Likes/${userName}`)
             .then((response) => response.data);
     });
 

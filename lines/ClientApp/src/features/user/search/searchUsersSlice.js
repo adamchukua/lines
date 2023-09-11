@@ -10,7 +10,7 @@ const initialState = {
 export const searchUsers = createAsyncThunk(
     "searchUsers/searchUsers",
     async (data) => {
-        let url = `/api/Users/Search/${data?.query}`;
+        let url = `https://localhost:7122/api/Users/Search/${data?.query}`;
 
         if (data?.pageNumber) {
             url += `?pageNumber=${data?.pageNumber}`;

@@ -11,7 +11,7 @@ export const fetchUserReplies = createAsyncThunk(
     "replies/fetchUserReplies",
     async (userName) => {
         return axios
-            .get(`/api/Posts/GetUserReplies/${userName}`)
+            .get(`https://localhost:7122/api/Posts/GetUserReplies/${userName}`)
             .then((response) => response.data);
     });
 
@@ -19,7 +19,7 @@ export const fetchPostReplies = createAsyncThunk(
     "replies/fetchPostReplies",
     async (postId) => {
         return axios
-            .get(`/api/Posts/GetPostReplies/${postId}`)
+            .get(`https://localhost:7122/api/Posts/GetPostReplies/${postId}`)
             .then((response) => response.data);
     });
 
