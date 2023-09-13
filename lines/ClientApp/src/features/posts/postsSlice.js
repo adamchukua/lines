@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import userManager from "../../app/oidc-config";
 
 const initialState = {
     posts: [],
@@ -9,7 +10,7 @@ const initialState = {
 
 export const fetchPosts = createAsyncThunk(
     "posts/fetchPosts",
-    async(data) => {
+    async (data) => {
         let url = `https://localhost:7122/api/Posts`;
 
         if (data?.pageNumber) {
@@ -49,6 +50,28 @@ export const searchPosts = createAsyncThunk(
         return axios
             .get(url)
             .then((response) => response.data);
+    });
+
+export const addPost = createAsyncThunk(
+    "posts/addPost",
+    async (data) => {
+        const user = await userManager.getUser();
+        data.userId = user.profile.sub;
+
+        return axios
+            .post(`https://localhost:7122/api/Posts/`, data, {
+                headers: {
+                    'Authorization': `Bearer ${user.access_token}`
+                }
+            })
+            .then((response) => {
+                // Handle successful POST response here
+                console.log('Post created successfully:', response.data);
+            })
+            .catch((error) => {
+                // Handle error here
+                console.error('Error creating post:', error);
+            });
     });
 
 const postsSlice = createSlice({
