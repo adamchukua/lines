@@ -13,6 +13,8 @@ namespace Api.Profiles
                 .ForMember(dest => dest.LikesCount, opt => opt.MapFrom(src => src.Likes.Count()))
                 .ForMember(dest => dest.RepliesCount, opt => opt.MapFrom(src => src.Replies.Count()))
                 .ReverseMap();
+
+            CreateMap<Post, AddPostDTO>().ReverseMap();
         }
     }
 }
