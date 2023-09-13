@@ -4,16 +4,19 @@ using Api.Entities;
 using Api.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using System.Drawing.Printing;
+using System.Web.Http.ModelBinding;
 
 namespace Api.Services.PostsService
 {
     public class PostsService : IPostsService
     {
         private readonly LinesDbContext _dbContext;
+        private readonly IMapper _mapper;
 
-        public PostsService(LinesDbContext dbContext)
+        public PostsService(LinesDbContext dbContext, IMapper mapper)
         {
             _dbContext = dbContext;
+            _mapper = mapper;
         }
 
         public async Task<List<Post>> GetAllPostsAsync(int pageNumber, int pageSize)
@@ -89,6 +92,15 @@ namespace Api.Services.PostsService
                 .ToListAsync();
 
             return posts;
+        }
+
+        public async Task<bool> AddPostAsync(AddPostDTO postDto)
+        {
+            var post = _mapper.Map<Post>(postDto);
+            await _dbContext.Posts.AddAsync(post);
+            await _dbContext.SaveChangesAsync();
+
+            return true;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Api.Entities;
+﻿using Api.DTOs;
+using Api.Entities;
 
 namespace Api.Services.PostsService
 {
@@ -9,5 +10,6 @@ namespace Api.Services.PostsService
         Task<Post> GetPostAsync(long postId);
         Task<List<Post>> GetPostRepliesAsync(long postId);
         Task<List<Post>> SearchPostsAsync(string searchQuery, int pageNumber, int pageSize);
+        Task<bool> AddPostAsync(AddPostDTO post);
     }
 }
