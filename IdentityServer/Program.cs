@@ -122,6 +122,15 @@ using (var scope = app.Services.CreateScope())
         }
         context.SaveChanges();
     }
+
+    if (!context.ApiResources.Any())
+    {
+        foreach (var apiResource in Configuration.ApiResources)
+        {
+            context.ApiResources.Add(apiResource.ToEntity());
+        }
+        context.SaveChanges();
+    }
 }
 
 app.Run();
