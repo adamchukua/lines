@@ -12,6 +12,7 @@ namespace Api.Tests
     public class PostsServiceTests
     {
         private LinesDbContext _dbContext;
+        private IMapper _mapper;
         private PostsService _postsService;
 
         [SetUp]
@@ -22,7 +23,17 @@ namespace Api.Tests
                 .Options;
 
             _dbContext = new LinesDbContext(options);
-            _postsService = new PostsService(_dbContext);
+
+            var host = Host.CreateDefaultBuilder()
+                .ConfigureServices((context, services) =>
+                {
+                    services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+                })
+                .Build();
+
+            _mapper = host.Services.GetRequiredService<IMapper>();
+
+            _postsService = new PostsService(_dbContext, _mapper);
         }
 
         [TearDown]
@@ -34,7 +45,7 @@ namespace Api.Tests
         [Test]
         public async Task GetAllPostsAsync_ShouldReturnAllPosts()
         {
-            var user = new User { Id = 1, UserName = "testuser", Name = "testuser"};
+            var user = new User { Id = 1, UserName = "testuser", Name = "testuser" };
             _dbContext.Users.Add(user);
 
             var posts = new List<Post>
