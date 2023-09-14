@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchPost } from "../features/posts/postsSlice";
-import { fetchPostReplies } from "../features/replies/repliesSlice";
+import { fetchPostReplies } from "../features/posts/postsSlice";
 import PostsList from "../features/posts/PostsList";
 import ReplyInput from "./ReplyInput";
 import DataDisplay from './DataDisplay';
@@ -13,7 +13,7 @@ export default function PostPage() {
     const postId = useParams()["postId"];
     const dispatch = useDispatch();
     const post = useSelector((state) => state.posts);
-    const replies = useSelector((state) => state.replies);
+    const replies = useSelector((state) => state.posts);
 
     useEffect(() => {
         dispatch(fetchPost({ userName: userName, postId: postId }));
@@ -27,7 +27,7 @@ export default function PostPage() {
         <DataDisplay status={post.status} error={post.error}>
             <Thread posts={[post.posts.parentPost, post.posts]} hasMainPost={true} />
 
-            <ReplyInput />
+            <ReplyInput postId={post.posts.id} />
 
             <DataDisplay status={replies.status} error={replies.error}>
                 <PostsList posts={replies.replies} />

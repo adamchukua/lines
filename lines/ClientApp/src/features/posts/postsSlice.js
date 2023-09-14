@@ -4,8 +4,9 @@ import userManager from "../../app/oidc-config";
 
 const initialState = {
     posts: [],
+    replies: [],
     status: "idle",
-    error: null
+    error: null,
 };
 
 export const fetchPosts = createAsyncThunk(
@@ -63,15 +64,23 @@ export const addPost = createAsyncThunk(
                 headers: {
                     'Authorization': `Bearer ${user.access_token}`
                 }
-            })
-            .then((response) => {
-                // Handle successful POST response here
-                console.log('Post created successfully:', response.data);
-            })
-            .catch((error) => {
-                // Handle error here
-                console.error('Error creating post:', error);
             });
+    });
+
+export const fetchUserReplies = createAsyncThunk(
+    "posts/fetchUserReplies",
+    async (userName) => {
+        return axios
+            .get(`https://localhost:7122/api/Posts/GetUserReplies/${userName}`)
+            .then((response) => response.data);
+    });
+
+export const fetchPostReplies = createAsyncThunk(
+    "posts/fetchPostReplies",
+    async (postId) => {
+        return axios
+            .get(`https://localhost:7122/api/Posts/GetPostReplies/${postId}`)
+            .then((response) => response.data);
     });
 
 const postsSlice = createSlice({
@@ -119,7 +128,44 @@ const postsSlice = createSlice({
             .addCase(searchPosts.rejected, (state, action) => {
                 state.status = "failed";
                 state.error = action.error.message;
-            });
+            })
+            // addPost
+            .addCase(addPost.pending, (state, action) => {
+                state.status = "loading";
+            })
+            .addCase(addPost.fulfilled, (state, action) => {
+                state.status = "succeeded";
+                state.replies.unshift(action.payload.data);
+                console.log(action.payload);
+            })
+            .addCase(addPost.rejected, (state, action) => {
+                state.status = "failed";
+                state.error = action.error.message;
+            })
+            // fetchUserReplies
+            .addCase(fetchUserReplies.pending, (state, action) => {
+                state.status = "loading";
+            })
+            .addCase(fetchUserReplies.fulfilled, (state, action) => {
+                state.status = "succeeded";
+                state.replies = action.payload;
+            })
+            .addCase(fetchUserReplies.rejected, (state, action) => {
+                state.status = "failed";
+                state.error = action.error.message;
+            })
+            // fetchPostReplies
+            .addCase(fetchPostReplies.pending, (state, action) => {
+                state.status = "loading";
+            })
+            .addCase(fetchPostReplies.fulfilled, (state, action) => {
+                state.status = "succeeded";
+                state.replies = action.payload;
+            })
+            .addCase(fetchPostReplies.rejected, (state, action) => {
+                state.status = "failed";
+                state.error = action.error.message;
+            })
     }
 });
 

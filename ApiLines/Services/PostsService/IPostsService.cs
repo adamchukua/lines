@@ -10,6 +10,6 @@ namespace Api.Services.PostsService
         Task<Post> GetPostAsync(long postId);
         Task<List<Post>> GetPostRepliesAsync(long postId);
         Task<List<Post>> SearchPostsAsync(string searchQuery, int pageNumber, int pageSize);
-        Task<bool> AddPostAsync(AddPostDTO post);
+        Task<Post> AddPostAsync(AddPostDTO post);
     }
 }
