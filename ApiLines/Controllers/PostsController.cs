@@ -2,6 +2,7 @@
 using Api.DTOs;
 using Api.Entities;
 using Api.Services.PostsService;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
@@ -89,6 +90,15 @@ namespace Api.Controllers
 
             var postDtos = _mapper.Map<List<PostBasicInfoDTO>>(posts);
             return Ok(postDtos);
+        }
+
+        [HttpPost]
+        [Authorize(AuthenticationSchemes = "Bearer")]
+        public async Task<ActionResult<bool>> AddPost(AddPostDTO post)
+        {
+            var result = await _postsService.AddPostAsync(post);
+
+            return Ok(result);
         }
     }
 }

@@ -1,6 +1,9 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from 'react-redux';
+import { addPost } from '../features/posts/postsSlice';
 
 export default function NewPostModal() {
+    const dispatch = useDispatch();
     const [isOpen, setIsOpen] = useState(false);
     const [postText, setPostText] = useState('');
     const [showSuccessNotification, setShowSuccessNotification] = useState(false);
@@ -11,7 +14,7 @@ export default function NewPostModal() {
     const handlePostSubmit = (event) => {
         event.preventDefault();
 
-        console.log(postText);
+        dispatch(addPost({ text: postText }));
 
         setShowSuccessNotification(true);
         setTimeout(() => setShowSuccessNotification(false), 3000);
