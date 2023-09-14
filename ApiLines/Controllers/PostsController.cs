@@ -94,11 +94,11 @@ namespace Api.Controllers
 
         [HttpPost]
         [Authorize(AuthenticationSchemes = "Bearer")]
-        public async Task<ActionResult<bool>> AddPost(AddPostDTO post)
+        public async Task<ActionResult<PostBasicInfoDTO>> AddPost(AddPostDTO post)
         {
-            var result = await _postsService.AddPostAsync(post);
+            var addedPost = await _postsService.AddPostAsync(post);
 
-            return Ok(result);
+            return Ok(addedPost);
         }
     }
 }

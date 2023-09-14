@@ -94,13 +94,22 @@ namespace Api.Services.PostsService
             return posts;
         }
 
-        public async Task<bool> AddPostAsync(AddPostDTO postDto)
+        public async Task<Post> AddPostAsync(AddPostDTO postDto)
         {
+            var user = await _dbContext.Users.FindAsync(postDto.UserId); // Retrieve the user by ID
+
+            if (user == null)
+            {
+                return null;
+            }
+
             var post = _mapper.Map<Post>(postDto);
+            post.User = user;
+
             await _dbContext.Posts.AddAsync(post);
             await _dbContext.SaveChangesAsync();
 
-            return true;
+            return post;
         }
     }
 }
