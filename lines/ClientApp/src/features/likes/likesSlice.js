@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import userManager from "../../app/oidc-config";
 
 const initialState = {
     likes: [],
@@ -13,6 +14,20 @@ export const fetchUserLikes = createAsyncThunk(
         return axios
             .get(`https://localhost:7122/api/Likes/${userName}`)
             .then((response) => response.data);
+    });
+
+export const addLike = createAsyncThunk(
+    "likes/addLike",
+    async (data) => {
+        const user = await userManager.getUser();
+        data.userId = user.profile.sub;
+
+        return axios
+            .post(`https://localhost:7122/api/Likes/`, data, {
+                headers: {
+                    'Authorization': `Bearer ${user.access_token}`
+                }
+            });
     });
 
 const likesSlice = createSlice({
