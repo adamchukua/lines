@@ -30,6 +30,16 @@ export const addLike = createAsyncThunk(
             });
     });
 
+export const checkLike = createAsyncThunk(
+    "likes/addLike",
+    async (data) => {
+        const user = await userManager.getUser();
+        const userId = user.profile.sub;
+
+        return axios
+            .get(`https://localhost:7122/api/Likes/${data?.postId}/${userId}`);
+    });
+
 const likesSlice = createSlice({
     name: "likes",
     initialState,
