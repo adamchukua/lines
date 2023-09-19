@@ -1,4 +1,7 @@
+import { useEffect, useState } from 'react';
 import { CornerUpLeft, Repeat, Heart, Share } from 'react-feather';
+import { useDispatch } from 'react-redux';
+import { addLike } from '../features/likes/likesSlice';
 
 export default function Post({ isThread, isMainPost, post }) {
     const getHumanReadableTime = (datetime) => {
@@ -26,6 +29,17 @@ export default function Post({ isThread, isMainPost, post }) {
             return `${Math.floor(timeDifference / month)}mo`;
         } else {
             return `${Math.floor(timeDifference / year)}y`;
+        }
+    };
+
+    const dispatch = useDispatch();
+    const [isLiked, setIsLiked] = useState(false);
+
+    const handleLike = async () => {
+        const result = await dispatch(addLike({ postId: post.id }));
+
+        if (result.payload.data) {
+            setIsLiked(true);
         }
     };
 
@@ -75,9 +89,9 @@ export default function Post({ isThread, isMainPost, post }) {
                                 </a>
 
                                 <a className="level-item text-black">
-                                    <Heart size={20} />
+                                    <Heart size={20} className={isLiked ? "filledSvg" : ""} onClick={handleLike} />
 
-                                    <p className="ml-2">{post?.likesCount}</p>
+                                    <p className="ml-2">{post?.likesCount + isLiked}</p>
                                 </a>
 
                                 <a className="level-item text-black">

@@ -9,7 +9,6 @@ export default function NavMenu() {
         userManager.getUser().then((user) => {
             if (user) {
                 setUser(user);
-                console.log(user.profile);
             }
         });
     }, []);
