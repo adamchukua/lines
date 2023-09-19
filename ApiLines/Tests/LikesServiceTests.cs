@@ -1,6 +1,7 @@
 ﻿using Api.Entities;
 using Api.Infrastructure.Data;
 using Api.Services.ILikesService;
+using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using NUnit.Framework;
 
@@ -11,6 +12,7 @@ namespace Api.Tests
     {
         private LinesDbContext _dbContext;
         private LikesService _likesService;
+        private IMapper _mapper;
 
         [SetUp]
         public void Setup()
@@ -19,8 +21,17 @@ namespace Api.Tests
                 .UseInMemoryDatabase(databaseName: "TestDatabase")
                 .Options;
 
+            var host = Host.CreateDefaultBuilder()
+                .ConfigureServices((context, services) =>
+                {
+                    services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+                })
+                .Build();
+
+            _mapper = host.Services.GetRequiredService<IMapper>();
+
             _dbContext = new LinesDbContext(options);
-            _likesService = new LikesService(_dbContext);
+            _likesService = new LikesService(_dbContext, _mapper);
         }
 
         [TearDown]
