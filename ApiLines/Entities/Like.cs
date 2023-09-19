@@ -8,5 +8,10 @@
         public DateTime CreatedAt { get; set; }
         public Post Post { get; set; }
         public User User { get; set; }
+
+        public Like()
+        {
+            CreatedAt = DateTime.Now;
+        }
     }
 }

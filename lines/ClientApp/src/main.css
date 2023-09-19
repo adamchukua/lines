@@ -124,3 +124,7 @@ body {
 .pos-fix {
     position: fixed;
 }
+
+.filledSvg {
+    fill: #000;
+}
