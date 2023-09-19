@@ -9,6 +9,7 @@ namespace Api.Profiles
         public LikeProfile()
         {
             CreateMap<LikeBasicInfoDTO, Like>().ReverseMap();
+            CreateMap<AddLikeDTO, Like>().ReverseMap();
         }
     }
 }
