@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Api.DTOs;
 using Api.Services.ILikesService;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
@@ -32,6 +33,21 @@ namespace Api.Controllers
 
             var postDtos = _mapper.Map<List<PostBasicInfoDTO>>(likes);
             return Ok(postDtos);
+        }
+
+        [HttpPost]
+        [Authorize(AuthenticationSchemes = "Bearer")]
+        public async Task<ActionResult<bool>> AddLike(AddLikeDTO like)
+        {
+            var result = await _likesService.AddLikeAsync(like);
+            return Ok(result);
+        }
+
+        [HttpGet("{postId}/{userId}")]
+        public async Task<ActionResult<bool>> CheckIsLikedByUser(long postId, long userId)
+        {
+            var result = await _likesService.CheckIsLikedByUserAsync(new CheckLikeDTO {PostId = postId, UserId = userId});
+            return result;
         }
     }
 }
