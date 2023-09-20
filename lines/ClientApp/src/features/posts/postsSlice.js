@@ -38,7 +38,7 @@ export const fetchPost = createAsyncThunk(
 export const searchPosts = createAsyncThunk(
     "posts/searchPosts",
     async (data) => {
-        let url = `https://localhost:7122/api/Posts/Search/${data?.query}`;
+        let url = `https://localhost:7122/api/Posts/${data?.query}`;
 
         if (data?.pageNumber) {
             url += `?pageNumber=${data?.pageNumber}`;
@@ -71,7 +71,7 @@ export const fetchUserReplies = createAsyncThunk(
     "posts/fetchUserReplies",
     async (userName) => {
         return axios
-            .get(`https://localhost:7122/api/Posts/GetUserReplies/${userName}`)
+            .get(`https://localhost:7122/api/Posts/${userName}/replies`)
             .then((response) => response.data);
     });
 
@@ -79,7 +79,7 @@ export const fetchPostReplies = createAsyncThunk(
     "posts/fetchPostReplies",
     async (postId) => {
         return axios
-            .get(`https://localhost:7122/api/Posts/GetPostReplies/${postId}`)
+            .get(`https://localhost:7122/api/Posts/${postId}/replies`)
             .then((response) => response.data);
     });
 
