@@ -128,3 +128,9 @@ body {
 .filledSvg {
     fill: #000;
 }
+
+.btn-sm {
+    width: auto;
+    height: auto;
+    font-size: 1rem;
+}
