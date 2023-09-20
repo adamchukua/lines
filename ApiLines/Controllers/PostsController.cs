@@ -5,7 +5,7 @@ using Api.Services.PostsService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
+using IdentityServer4.Extensions;
 
 namespace Api.Controllers
 {
@@ -36,7 +36,7 @@ namespace Api.Controllers
             return Ok(postDtos);
         }
 
-        [HttpGet("GetUserReplies/{userName}")]
+        [HttpGet("user/{userName}/replies")]
         public async Task<ActionResult<List<PostBasicInfoDTO>>> GetUserReplies(string userName)
         {
             var replies = await _postsService.GetUserRepliesAsync(userName);
@@ -64,14 +64,14 @@ namespace Api.Controllers
             return Ok(postDto);
         }
 
-        [HttpGet("GetPostReplies/{postId}")]
+        [HttpGet("{postId}/replies")]
         public async Task<ActionResult<List<PostBasicInfoDTO>>> GetPostReplies(long postId)
         {
             var replies = await _postsService.GetPostRepliesAsync(postId);
 
             if (replies.IsNullOrEmpty())
             {
-                return NotFound();
+                return new List<PostBasicInfoDTO>();
             }
 
             var replyDtos = _mapper.Map<List<PostBasicInfoDTO>>(replies);
