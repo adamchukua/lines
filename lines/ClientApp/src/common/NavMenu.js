@@ -38,7 +38,7 @@ export default function NavMenu() {
                     <nav className="pos-fix">
                         <ul className="menu-list my-4">
                             <li><a href="/">Home</a></li>
-                            <li><a href="/profile">Profile</a></li>
+                            <li><a href={`/profile/${user.profile?.name}`}>Profile</a></li>
                             <li><a href="/notifications">Notifications</a></li>
                             <li><a href="/settings">Settings</a></li>
 
