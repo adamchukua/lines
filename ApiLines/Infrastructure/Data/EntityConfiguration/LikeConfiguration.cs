@@ -21,6 +21,8 @@ namespace Api.Infrastructure.Data.EntityConfiguration
                 .OnDelete(DeleteBehavior.Restrict);
 
             builder.Property(l => l.CreatedAt).ValueGeneratedOnAdd();
+
+            builder.HasIndex(l => new { l.PostId, l.UserId }).IsUnique();
         }
     }
 }
