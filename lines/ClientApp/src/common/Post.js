@@ -4,6 +4,8 @@ import { useDispatch } from 'react-redux';
 import { addLike, checkLike } from '../features/likes/likesSlice';
 
 export default function Post({ isThread, isMainPost, post }) {
+    const [avatar, setAvatar] = useState("");
+
     const getHumanReadableTime = (datetime) => {
         const now = new Date();
         const timeDifference = now - datetime;
@@ -42,9 +44,22 @@ export default function Post({ isThread, isMainPost, post }) {
                 setIsLiked(true);
             }
         });
+
+        if (post) {
+            if (post.user?.avatar) {
+                setAvatar(`/images/avatars/${post.user?.avatar}`);
+            } else {
+                setAvatar(`https://ui-avatars.com/api/?name=${post.user?.name}`);
+            }
+        }
     }, [post]);
 
     const handleLike = async () => {
+        if (isLiked) {
+            console.log("Todo: delete like");
+            return;
+        }
+
         const result = await dispatch(addLike({ postId: post.id }));
 
         if (result.payload.data) {
@@ -60,7 +75,7 @@ export default function Post({ isThread, isMainPost, post }) {
                     <div className="media-left">
                         <figure className="image is-64x64">
                             <a href={`profile/${post.user?.userName}`}>
-                                <img src={`/images/avatars/${post.user?.avatar}`} className="is-rounded" alt="Image" />
+                                <img src={avatar} className="is-rounded" alt="Image" />
                             </a>
 
                             {isThread && (<div className="thread-line"></div>)}
