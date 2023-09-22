@@ -3,6 +3,7 @@ import axios from "axios";
 import userManager from "../../app/oidc-config";
 
 const initialState = {
+    post: [],
     posts: [],
     replies: [],
     status: "idle",
@@ -111,7 +112,7 @@ const postsSlice = createSlice({
             })
             .addCase(fetchPost.fulfilled, (state, action) => {
                 state.status = "succeeded";
-                state.posts = action.payload;
+                state.post = action.payload;
             })
             .addCase(fetchPost.rejected, (state, action) => {
                 state.status = "failed";

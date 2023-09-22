@@ -7,6 +7,7 @@ import PostsList from "../features/posts/PostsList";
 import ReplyInput from "./ReplyInput";
 import DataDisplay from './DataDisplay';
 import Thread from './Thread';
+import Post from './Post';
 
 export default function PostPage() {
     const userName = useParams()["userName"];
@@ -20,14 +21,20 @@ export default function PostPage() {
     }, [dispatch]);
 
     useEffect(() => {
-        dispatch(fetchPostReplies(post.posts?.id));
-    }, [post.posts.id]);
+        if (post.post?.id) {
+            dispatch(fetchPostReplies(post.post?.id));
+        }
+    }, [post.post.id]);
 
     return (
         <DataDisplay status={post.status} error={post.error}>
-            <Thread posts={[post.posts.parentPost, post.posts]} hasMainPost={true} />
+            {post.post.parentPost ? (
+                <Thread posts={[post.post.parentPost, post.post]} hasMainPost={true} />
+            ) : (
+                <Post post={post.post } />
+            )}
 
-            <ReplyInput postId={post.posts.id} />
+            <ReplyInput postId={post.post.id} />
 
             <DataDisplay status={replies.status} error={replies.error}>
                 <PostsList posts={replies.replies} />
