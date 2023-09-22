@@ -97,8 +97,9 @@ namespace Api.Controllers
         public async Task<ActionResult<PostBasicInfoDTO>> AddPost(AddPostDTO post)
         {
             var addedPost = await _postsService.AddPostAsync(post);
+            var addedPostDto = _mapper.Map<PostBasicInfoDTO>(addedPost);
 
-            return Ok(addedPost);
+            return Ok(addedPostDto);
         }
     }
 }
