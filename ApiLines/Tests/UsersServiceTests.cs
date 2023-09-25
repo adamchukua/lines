@@ -18,7 +18,7 @@ namespace Api.Tests
         public void Setup()
         {
             var options = new DbContextOptionsBuilder<LinesDbContext>()
-                .UseInMemoryDatabase(databaseName: "TestDatabase")
+                .UseInMemoryDatabase(Guid.NewGuid().ToString())
                 .Options;
 
             _dbContext = new LinesDbContext(options);
