@@ -7,6 +7,7 @@ namespace Api.Services.ILikesService
     {
         Task<List<Like>> GetUserLikesAsync(string userName);
         Task<bool> AddLikeAsync(AddLikeDTO like);
+        Task<bool> DeleteLikeAsync(DeleteLikeDTO like);
         Task<bool> CheckIsLikedByUserAsync(CheckLikeDTO like);
     }
 }

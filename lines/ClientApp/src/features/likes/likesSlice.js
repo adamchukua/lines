@@ -30,6 +30,21 @@ export const addLike = createAsyncThunk(
             });
     });
 
+export const deleteLike = createAsyncThunk(
+    "likes/deleteLike",
+    async (data) => {
+        const user = await userManager.getUser();
+        data.userId = user.profile.sub;
+
+        return axios
+            .delete(`https://localhost:7122/api/Likes/`, {
+                headers: {
+                    'Authorization': `Bearer ${user.access_token}`
+                },
+                data
+            });
+    });
+
 export const checkLike = createAsyncThunk(
     "likes/addLike",
     async (data) => {
