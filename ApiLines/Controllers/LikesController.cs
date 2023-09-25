@@ -43,6 +43,14 @@ namespace Api.Controllers
             return Ok(result);
         }
 
+        [HttpDelete]
+        [Authorize(AuthenticationSchemes = "Bearer")]
+        public async Task<ActionResult<bool>> DeleteLike(DeleteLikeDTO like)
+        {
+            var result = await _likesService.DeleteLikeAsync(like);
+            return Ok(result);
+        }
+
         [HttpGet("{postId}/{userId}")]
         public async Task<ActionResult<bool>> CheckIsLikedByUser(long postId, long userId)
         {
