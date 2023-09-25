@@ -12,10 +12,5 @@
         public IEnumerable<Like> Likes { get; set; }
         public IEnumerable<Post> Replies { get; set; }
         public Post ParentPost { get; set; }
-
-        public Post()
-        {
-            CreatedAt = DateTime.Now;
-        }
     }
 }

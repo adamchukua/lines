@@ -47,7 +47,9 @@ namespace Api.Services.PostsService
                         Reposts = new List<Repost>(new Repost[p.ParentPost.Reposts.Count()]),
                         Likes = new List<Like>(new Like[p.ParentPost.Likes.Count()]),
                         Replies = new List<Post>(new Post[p.ParentPost.Replies.Count()]),
-                    }
+                        CreatedAt = p.ParentPost.CreatedAt
+                    },
+                    CreatedAt = p.CreatedAt
                 });
 
             var posts = await query.AsNoTracking().ToListAsync();
@@ -131,6 +133,7 @@ namespace Api.Services.PostsService
 
             var post = _mapper.Map<Post>(postDto);
             post.User = user;
+            post.CreatedAt = DateTime.Now;
 
             await _dbContext.Posts.AddAsync(post);
             await _dbContext.SaveChangesAsync();
