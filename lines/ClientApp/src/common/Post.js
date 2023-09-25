@@ -1,42 +1,15 @@
 import { useEffect, useState } from 'react';
 import { CornerUpLeft, Repeat, Heart, Share } from 'react-feather';
 import { useDispatch } from 'react-redux';
-import { addLike, checkLike } from '../features/likes/likesSlice';
+import { addLike, deleteLike, checkLike } from '../features/likes/likesSlice';
+import { getHumanReadableTime } from '../features/posts/postsSlice';
 
 export default function Post({ isThread, isMainPost, post }) {
-    const [avatar, setAvatar] = useState("");
-
-    const getHumanReadableTime = (datetime) => {
-        const now = new Date();
-        const timeDifference = now - datetime;
-
-        const minute = 60 * 1000;
-        const hour = 60 * minute;
-        const day = 24 * hour;
-        const week = 7 * day;
-        const month = 30 * day;
-        const year = 365 * day;
-
-        if (timeDifference < minute) {
-            return `${Math.floor(timeDifference / 1000)}s`;
-        } else if (timeDifference < hour) {
-            return `${Math.floor(timeDifference / minute)}m`;
-        } else if (timeDifference < day) {
-            return `${Math.floor(timeDifference / hour)}h`;
-        } else if (timeDifference < week) {
-            return `${Math.floor(timeDifference / day)}d`;
-        } else if (timeDifference < month) {
-            return `${Math.floor(timeDifference / week)}w`;
-        } else if (timeDifference < year) {
-            return `${Math.floor(timeDifference / month)}mo`;
-        } else {
-            return `${Math.floor(timeDifference / year)}y`;
-        }
-    };
-
     const dispatch = useDispatch();
+    const [avatar, setAvatar] = useState("");
     const [isLiked, setIsLiked] = useState(false);
     const [isNewLike, setIsNewLike] = useState(false);
+    const [likeStatus, setLikeStatus] = useState(0);
 
     useEffect(() => {
         dispatch(checkLike({ postId: post.id })).then(result => {
@@ -56,15 +29,22 @@ export default function Post({ isThread, isMainPost, post }) {
 
     const handleLike = async () => {
         if (isLiked) {
-            console.log("Todo: delete like");
-            return;
+            const unlike = await dispatch(deleteLike({ postId: post.id }));
+
+            if (unlike.payload.data) {
+                setIsLiked(false);
+                setIsNewLike(false);
+                setLikeStatus(isNewLike ? 0 : -1);
+                return;
+            }
         }
 
-        const result = await dispatch(addLike({ postId: post.id }));
+        const like = await dispatch(addLike({ postId: post.id }));
 
-        if (result.payload.data) {
+        if (like.payload.data) {
             setIsLiked(true);
             setIsNewLike(true);
+            setLikeStatus(1);
         }
     };
 
@@ -81,7 +61,6 @@ export default function Post({ isThread, isMainPost, post }) {
                             {isThread && (<div className="thread-line"></div>)}
                         </figure>
                     </div>
-
                     <div className="media-content">
                         <div className="content">
                             <div className="is-flex is-justify-content-space-between">
@@ -116,7 +95,7 @@ export default function Post({ isThread, isMainPost, post }) {
                                 <a className="level-item text-black">
                                     <Heart size={20} className={isLiked ? "filledSvg" : ""} onClick={handleLike} />
 
-                                    <p className="ml-2">{post?.likesCount + isNewLike}</p>
+                                    <p className="ml-2">{post?.likesCount + likeStatus}</p>
                                 </a>
 
                                 <a className="level-item text-black">

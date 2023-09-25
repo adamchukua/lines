@@ -10,6 +10,34 @@ const initialState = {
     error: null,
 };
 
+export const getHumanReadableTime = (datetime) => {
+    const now = new Date();
+    const timeDifference = now - datetime;
+
+    const minute = 60 * 1000;
+    const hour = 60 * minute;
+    const day = 24 * hour;
+    const week = 7 * day;
+    const month = 30 * day;
+    const year = 365 * day;
+
+    if (timeDifference < minute) {
+        return `${Math.floor(timeDifference / 1000)}s`;
+    } else if (timeDifference < hour) {
+        return `${Math.floor(timeDifference / minute)}m`;
+    } else if (timeDifference < day) {
+        return `${Math.floor(timeDifference / hour)}h`;
+    } else if (timeDifference < week) {
+        return `${Math.floor(timeDifference / day)}d`;
+    } else if (timeDifference < month) {
+        return `${Math.floor(timeDifference / week)}w`;
+    } else if (timeDifference < year) {
+        return `${Math.floor(timeDifference / month)}mo`;
+    } else {
+        return `${Math.floor(timeDifference / year)}y`;
+    }
+};
+
 export const fetchPosts = createAsyncThunk(
     "posts/fetchPosts",
     async (data) => {

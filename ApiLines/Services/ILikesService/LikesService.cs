@@ -38,6 +38,15 @@ namespace Api.Services.ILikesService
             return true;
         }
 
+        public async Task<bool> DeleteLikeAsync(DeleteLikeDTO likeDto)
+        {
+            var like = await _dbContext.Likes.SingleOrDefaultAsync(l => l.PostId == likeDto.PostId && l.UserId == likeDto.UserId);
+            _dbContext.Likes.Remove(like);
+            await _dbContext.SaveChangesAsync();
+
+            return true;
+        }
+
         public async Task<bool> CheckIsLikedByUserAsync(CheckLikeDTO likeDto)
         {
             var likeExists = await _dbContext.Likes
