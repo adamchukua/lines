@@ -3,6 +3,8 @@ import NotificationsPage from "../features/notifications/NotificationsPage";
 import PostPage from "../common/PostPage";
 import ProfilePage from "../common/ProfilePage";
 import SettingsPage from "../common/SettingsPage";
+import SearchPage from "../common/SearchPage";
+import Callback from "../common/Callback";
 
 const AppRoutes = [
     {
@@ -10,7 +12,7 @@ const AppRoutes = [
         element: <Home />
     },
     {
-        path: "/post",
+        path: "/profile/:userName/post/:postId",
         element: <PostPage />
     },
     {
@@ -22,9 +24,17 @@ const AppRoutes = [
         element: <SettingsPage />
     },
     {
-        path: "/profile",
+        path: "/profile/:userName",
         element: <ProfilePage />
-    }
+    },
+    {
+        path: "/search",
+        element: <SearchPage />
+    },
+    {
+        path: "/callback",
+        element: <Callback />
+    },
 ];
 
 export default AppRoutes;

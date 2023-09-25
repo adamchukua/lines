@@ -1,20 +1,19 @@
+import React from "react";
 import Post from "../../common/Post";
 import Thread from "../../common/Thread";
 
-export default function PostsList() {
+export default function PostsList({ posts }) {
     return (
-        <div>
-            <div className="box post">
-                <Post />
-            </div>
-
-            <div className="box post">
-                <Thread />
-            </div>
-
-            <div className="box post">
-                <Post />
-            </div>
-        </div>
+        <>
+            {posts?.map((post) => (
+                <React.Fragment key={post.id}>
+                    {post.parentPost ? (
+                        <Thread posts={[post.parentPost, post]} />
+                    ) : (
+                        <Post post={post} />
+                    )}
+                </React.Fragment>
+            ))}
+        </>
     );
 }
